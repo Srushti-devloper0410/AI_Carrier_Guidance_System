@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile | AI Career Guide</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="navbar.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div id="navbar-container"></div>
+
+<script src="navbar.js"></script>
+
+
+<!-- Profile Section -->
+<section class="profile-section">
+
+    <div class="container">
+
+        <div class="profile-header text-center">
+
+            <div class="profile-badge">
+                STUDENT PROFILE
+            </div>
+
+            <h1>
+                Tell Us About <span>You</span>
+            </h1>
+
+            <p>
+                Enter your academic details and preferences to receive
+                personalized career recommendations.
+            </p>
+
+        </div>
+
+
+        <!-- Profile Form -->
+        <div class="profile-card">
+
+            <form id="profileForm">
+
+                <!-- Personal Information -->
+                <div class="form-section">
+
+                    <h3>Personal Information</h3>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <label for="studentName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="studentName"
+                                class="form-control"
+                                placeholder="Enter your full name"
+                                required>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                placeholder="Enter your email"
+                                required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Academic Information -->
+                <div class="form-section">
+
+                    <h3>Academic Information</h3>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label for="course">
+                                Current Course
+                            </label>
+
+                            <select id="course" class="form-select" required>
+
+                                <option value="">
+                                    Select your course
+                                </option>
+
+                                <option value="BCA">
+                                    BCA
+                                </option>
+
+                                <option value="BSc">
+                                    B.Sc
+                                </option>
+
+                                <option value="BTech">
+                                    B.Tech
+                                </option>
+
+                                <option value="BE">
+                                    B.E
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label for="year">
+                                Current Year
+                            </label>
+
+                            <select id="year" class="form-select" required>
+
+                                <option value="">
+                                    Select year
+                                </option>
+
+                                <option value="First Year">
+                                    First Year
+                                </option>
+
+                                <option value="Second Year">
+                                    Second Year
+                                </option>
+
+                                <option value="Third Year">
+                                    Third Year
+                                </option>
+
+                                <option value="Final Year">
+                                    Final Year
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label for="percentage">
+                                Academic Performance (%)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="percentage"
+                                class="form-control"
+                                placeholder="Example: 82"
+                                min="0"
+                                max="100"
+                                required>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label for="stream">
+                                Academic Stream
+                            </label>
+
+                            <select id="stream" class="form-select" required>
+
+                                <option value="">
+                                    Select stream
+                                </option>
+
+                                <option value="Computer Science">
+                                    Computer Science
+                                </option>
+
+                                <option value="Commerce">
+                                    Commerce
+                                </option>
+
+                                <option value="Science">
+                                    Science
+                                </option>
+
+                                <option value="Arts">
+                                    Arts
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Skills -->
+                <div class="form-section">
+
+                    <h3>Skills & Interests</h3>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label for="skills">
+                                Current Skills
+                            </label>
+
+                            <input
+                                type="text"
+                                id="skills"
+                                class="form-control"
+                                placeholder="Example: HTML, JavaScript, Python"
+                                required>
+
+                            <small>
+                                Separate multiple skills with commas.
+                            </small>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label for="interest">
+                                Area of Interest
+                            </label>
+
+                            <select id="interest" class="form-select" required>
+
+                                <option value="">
+                                    Select your interest
+                                </option>
+
+                                <option value="Web Development">
+                                    Web Development
+                                </option>
+
+                                <option value="Data Science">
+                                    Data Science
+                                </option>
+
+                                <option value="UI UX Design">
+                                    UI/UX Design
+                                </option>
+
+                                <option value="Cybersecurity">
+                                    Cybersecurity
+                                </option>
+
+                                <option value="Artificial Intelligence">
+                                    Artificial Intelligence
+                                </option>
+
+                                <option value="Business">
+                                    Business
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+               <!-- Profile Actions -->
+                <div class="profile-action">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg">
+                        Save Profile
+                    </button>
+
+                    <button
+                        type="reset"
+                        class="btn btn-outline-secondary btn-lg">
+                        Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="container text-center">
+
+        <p class="mb-0">
+            © 2026 AI Career Guidance System
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="profile.js"></script>
+
+</body>
+</html>

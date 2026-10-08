@@ -1,0 +1,127 @@
+/* ================= ASSESSMENT PAGE ================= */
+
+.assessment-section {
+    min-height: 100vh;
+    padding: 140px 0 70px;
+    background: linear-gradient(135deg, #f5f9ff, #ffffff);
+}
+
+.assessment-header {
+    margin-bottom: 40px;
+}
+
+.assessment-badge {
+    display: inline-block;
+    background: #eaf2ff;
+    color: #2563eb;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.assessment-header h1 {
+    margin-top: 15px;
+    font-size: 44px;
+    font-weight: 700;
+    color: #172554;
+}
+
+.assessment-header h1 span {
+    color: #2563eb;
+}
+
+.assessment-header p {
+    color: #64748b;
+    max-width: 650px;
+    margin: 12px auto;
+    line-height: 1.7;
+}
+
+.assessment-card {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.10);
+}
+
+.question-box {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.question-box:last-of-type {
+    border-bottom: none;
+}
+
+.question-box h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #172554;
+    margin-bottom: 20px;
+}
+
+.option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.assessment-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid #dbe3ee;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #334155;
+    transition: 0.2s;
+}
+
+.assessment-option:hover {
+    border-color: #2563eb;
+    background: #f8fbff;
+}
+
+.assessment-option input {
+    accent-color: #2563eb;
+}
+
+.assessment-action {
+    text-align: right;
+    padding-top: 10px;
+}
+
+.assessment-action .btn {
+    padding: 12px 26px;
+    border-radius: 9px;
+}
+
+@media (max-width: 576px) {
+
+    .assessment-section {
+        padding: 120px 15px 50px;
+    }
+
+    .assessment-header h1 {
+        font-size: 34px;
+    }
+
+    .assessment-card {
+        padding: 25px 20px;
+    }
+
+    .assessment-action {
+        text-align: center;
+    }
+
+    .assessment-action .btn {
+        width: 100%;
+    }
+}

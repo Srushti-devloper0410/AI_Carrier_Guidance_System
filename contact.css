@@ -1,0 +1,408 @@
+/* ================================
+   GLOBAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #172554;
+    background: #ffffff;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+    padding: 10px 0;
+    border-bottom: 1px solid #e8eef7;
+}
+
+.navbar-brand {
+    color: #172554;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.navbar-brand span {
+    color: #2563eb;
+}
+
+.nav-link {
+    color: #475569 !important;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 12px;
+}
+
+.nav-link:hover {
+    color: #2563eb !important;
+}
+
+.nav-btn {
+    padding: 8px 18px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   CONTACT SECTION
+================================ */
+
+.contact-section {
+    min-height: calc(100vh - 180px);
+    padding: 135px 0 70px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7faff 0%,
+            #ffffff 55%,
+            #f3f8ff 100%
+        );
+}
+
+
+/* ================================
+   CONTACT HEADING
+================================ */
+
+.contact-heading {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-badge {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.contact-heading h1 {
+    color: #172554;
+    font-size: 38px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.contact-heading p {
+    max-width: 600px;
+    margin: auto;
+
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   CONTACT INFORMATION
+================================ */
+
+.contact-info {
+    height: 100%;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.07);
+}
+
+.contact-info h3,
+.contact-form h3 {
+    color: #172554;
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.info-text {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+
+/* ================================
+   INFO ITEMS
+================================ */
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    margin-bottom: 24px;
+}
+
+.info-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+.info-item strong {
+    display: block;
+
+    color: #172554;
+
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.info-item p {
+    color: #64748b;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    margin: 0;
+}
+
+
+/* ================================
+   CONTACT FORM
+================================ */
+
+.contact-form {
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.07);
+}
+
+.contact-form label {
+    display: block;
+
+    color: #334155;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+.contact-form .form-control {
+    color: #172554;
+
+    font-size: 13px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+
+    box-shadow: none;
+}
+
+.contact-form .form-control:focus {
+    border-color: #86b7fe;
+
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.08);
+}
+
+.contact-form .form-control::placeholder {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+
+/* ================================
+   SEND BUTTON
+================================ */
+
+.send-btn {
+    padding: 10px 18px;
+
+    background: #0d6efd;
+    border-color: #0d6efd;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.send-btn i {
+    margin-left: 5px;
+}
+
+.send-btn:hover {
+    background: #0b5ed7;
+    border-color: #0b5ed7;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+    padding: 38px 0 20px;
+
+    background: #172554;
+
+    color: #ffffff;
+}
+
+.footer-content {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 60px;
+
+    align-items: start;
+}
+
+.footer-content strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.footer-brand p {
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    margin: 0;
+
+    line-height: 1.6;
+}
+
+.footer-links p {
+    margin: 5px 0;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    margin-top: 28px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 991px) {
+
+    .contact-section {
+        padding-top: 125px;
+    }
+
+    .contact-heading h1 {
+        font-size: 34px;
+    }
+
+    .contact-info {
+        margin-bottom: 5px;
+    }
+
+    .navbar .nav-link {
+        margin-left: 0;
+    }
+
+    .nav-btn {
+        margin-top: 8px;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .contact-section {
+        padding: 115px 20px 55px;
+    }
+
+    .contact-heading h1 {
+        font-size: 30px;
+    }
+
+    .contact-heading p {
+        font-size: 13px;
+    }
+
+    .contact-info,
+    .contact-form {
+        padding: 25px 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
+}

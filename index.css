@@ -1,0 +1,693 @@
+/* ================================
+   GLOBAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #172554;
+    background: #ffffff;
+    overflow-x: hidden;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+    padding: 10px 0;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e8eef7;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: #172554;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.navbar-brand:hover {
+    color: #172554;
+}
+
+.nav-link {
+    color: #475569 !important;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 12px;
+    padding: 8px 5px !important;
+    transition: 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #2563eb !important;
+}
+
+.nav-btn {
+    padding: 8px 18px !important;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.navbar-toggler {
+    border: none;
+    box-shadow: none !important;
+}
+
+
+/* ================================
+   PROFILE ICON
+================================ */
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-right: 6px;
+    border: 1px solid #dbeafe;
+}
+
+.profile-icon i {
+    line-height: 1;
+}
+
+
+/* ================================
+   PROFILE DROPDOWN
+================================ */
+
+.dropdown-menu {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    min-width: 210px;
+}
+
+.dropdown-header {
+    color: #172554;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dropdown-item {
+    border-radius: 6px;
+    font-size: 13px;
+    color: #475569;
+    padding: 9px 10px;
+}
+
+.dropdown-item:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+/* ================================
+   HERO SECTION
+================================ */
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 650px;
+
+    padding: 145px 0 95px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(245, 249, 255, 0.97) 0%,
+            rgba(245, 249, 255, 0.92) 42%,
+            rgba(245, 249, 255, 0.72) 72%,
+            rgba(245, 249, 255, 0.55) 100%
+        ),
+        url("../images/career-ai-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* ================================
+   HERO TEXT
+================================ */
+
+.hero-badge {
+    display: inline-block;
+
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.4px;
+
+    margin-bottom: 12px;
+}
+
+.hero-section h1 {
+    max-width: 570px;
+
+    color: #172554;
+
+    font-size: 43px;
+    line-height: 1.15;
+
+    font-weight: 500;
+
+    letter-spacing: -1.1px;
+
+    margin-bottom: 14px;
+}
+
+.hero-section h1 span {
+    color: #172554;
+}
+
+.hero-text {
+    max-width: 510px;
+
+    color: #334155;
+
+    font-size: 15px;
+    line-height: 1.65;
+
+    margin-bottom: 20px;
+}
+
+
+/* ================================
+   HERO BUTTONS
+================================ */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.hero-buttons .btn {
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 9px 15px;
+
+    border-radius: 6px;
+}
+
+.hero-buttons .btn-primary {
+    background: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.hero-buttons .btn-primary:hover {
+    background: #0b5ed7;
+    border-color: #0b5ed7;
+}
+
+.hero-buttons .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.hero-buttons .btn-outline-primary:hover {
+    color: #ffffff;
+    background: #0d6efd;
+}
+
+.arrow {
+    margin-left: 4px;
+    font-size: 15px;
+}
+
+
+/* ================================
+   HERO NOTE
+================================ */
+
+.hero-note {
+    color: #334155;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 4px;
+}
+
+.hero-note i {
+    font-size: 12px;
+}
+
+
+/* ================================
+   DASHBOARD CARD
+================================ */
+
+.dashboard-card {
+    position: relative;
+
+    width: 100%;
+    max-width: 470px;
+
+    margin: 0 auto;
+
+    padding: 27px 22px 21px;
+
+    background: rgba(255, 255, 255, 0.93);
+
+    border: 1px solid rgba(219, 229, 241, 0.9);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(37, 99, 235, 0.13),
+        0 5px 20px rgba(15, 23, 42, 0.05);
+
+    backdrop-filter: blur(5px);
+}
+
+
+/* ================================
+   DASHBOARD TOP
+================================ */
+
+.dashboard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #172554;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-dot {
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    background: #22c55e;
+
+    border-radius: 50%;
+
+    margin-right: 7px;
+}
+
+.ai-label {
+    background: #eff6ff;
+    color: #2563eb;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   ROBOT / CAREER CIRCLE
+================================ */
+
+.career-circle {
+    width: 78px;
+    height: 78px;
+
+    margin: 25px auto 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 50%;
+}
+
+.robot {
+    font-size: 39px;
+}
+
+
+/* ================================
+   DASHBOARD TEXT
+================================ */
+
+.dashboard-card h3 {
+    text-align: center;
+
+    color: #172554;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+.dashboard-card > p {
+    max-width: 320px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+
+/* ================================
+   CAREER OPTIONS
+================================ */
+
+.career-options {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-top: 19px;
+}
+
+.career-option {
+    padding: 13px 6px;
+
+    text-align: center;
+
+    background: #f8fbff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    transition: 0.25s ease;
+}
+
+.career-option:hover {
+    transform: translateY(-3px);
+
+    border-color: #bfdbfe;
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.career-option > span {
+    display: block;
+
+    font-size: 21px;
+
+    margin-bottom: 5px;
+}
+
+.career-option strong {
+    display: block;
+
+    color: #172554;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    margin-top: 3px;
+}
+
+.career-option small {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 8px;
+
+    margin-top: 3px;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+    padding: 38px 0 20px;
+    background: #172554;
+    color: #ffffff;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.footer-content strong {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.footer-brand p {
+    color: #cbd5e1;
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.footer-links p {
+    margin: 5px 0;
+}
+
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+
+/* MOBILE FOOTER */
+
+@media (max-width: 576px) {
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .footer-bottom {
+        margin-top: 25px;
+        text-align: center;
+    }
+}
+
+/* ================================
+   LOGOUT MODAL
+================================ */
+
+.logout-modal {
+    border: none;
+    border-radius: 16px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+.logout-modal .modal-title {
+    color: #172554;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.logout-icon {
+    width: 62px;
+    height: 62px;
+
+    margin: 5px auto 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff1f2;
+
+    color: #dc3545;
+
+    font-size: 26px;
+}
+
+.logout-modal h4 {
+    color: #172554;
+
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.logout-modal p {
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.logout-modal .btn {
+    min-width: 95px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   RESPONSIVE - TABLET
+================================ */
+
+@media (max-width: 991px) {
+
+    .hero-section {
+        min-height: auto;
+
+        padding: 130px 0 75px;
+    }
+
+    .hero-section h1 {
+        font-size: 39px;
+    }
+
+    .hero-text {
+        font-size: 14px;
+    }
+
+    .dashboard-card {
+        margin-top: 45px;
+    }
+
+    .navbar .nav-link {
+        margin-left: 0;
+    }
+
+    .nav-btn {
+        margin-top: 8px;
+    }
+}
+
+
+/* ================================
+   RESPONSIVE - MOBILE
+================================ */
+
+@media (max-width: 576px) {
+
+    .navbar {
+        padding: 9px 0;
+    }
+
+    .navbar-brand {
+        font-size: 18px;
+    }
+
+    .hero-section {
+        padding: 115px 20px 60px;
+
+        background-position: center;
+    }
+
+    .hero-section h1 {
+        font-size: 34px;
+        line-height: 1.2;
+        letter-spacing: -0.7px;
+    }
+
+    .hero-text {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-note {
+        font-size: 11px;
+    }
+
+    .dashboard-card {
+        padding: 22px 16px 18px;
+    }
+
+    .career-options {
+        grid-template-columns: 1fr;
+    }
+
+    .career-option {
+        padding: 11px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 10px;
+    }
+}

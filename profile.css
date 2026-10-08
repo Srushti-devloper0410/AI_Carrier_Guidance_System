@@ -1,0 +1,130 @@
+/* ================= PROFILE PAGE ================= */
+
+.profile-section {
+    min-height: 100vh;
+    padding: 140px 0 70px;
+    background: linear-gradient(135deg, #f5f9ff, #ffffff);
+}
+
+.profile-header {
+    margin-bottom: 40px;
+}
+
+.profile-badge {
+    display: inline-block;
+    background: #eaf2ff;
+    color: #2563eb;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.profile-header h1 {
+    margin-top: 15px;
+    font-size: 44px;
+    font-weight: 700;
+    color: #172554;
+}
+
+.profile-header h1 span {
+    color: #2563eb;
+}
+
+.profile-header p {
+    color: #64748b;
+    max-width: 650px;
+    margin: 12px auto;
+    line-height: 1.7;
+}
+
+.profile-card {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.10);
+}
+
+.form-section {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #172554;
+    margin-bottom: 22px;
+}
+
+.form-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-control,
+.form-select {
+    min-height: 48px;
+    border: 1px solid #dbe3ee;
+    border-radius: 9px;
+    padding: 10px 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.form-section small {
+    display: block;
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.profile-action {
+    text-align: right;
+    padding-top: 5px;
+}
+
+.profile-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 576px) {
+
+    .profile-section {
+        padding: 120px 15px 50px;
+    }
+
+    .profile-header h1 {
+        font-size: 34px;
+    }
+
+    .profile-card {
+        padding: 25px 20px;
+    }
+
+    .profile-action {
+        text-align: center;
+    }
+
+    .profile-action .btn {
+        width: 100%;
+    }
+}

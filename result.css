@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #172554;
+    background: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+
+.navbar {
+    padding: 15px 0;
+    border-bottom: 1px solid #e8eef7;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: #172554;
+    font-size: 22px;
+}
+
+.brand-icon {
+    color: #2563eb;
+    font-size: 25px;
+}
+
+.nav-link {
+    color: #475569 !important;
+    font-size: 14px;
+    margin-left: 12px;
+}
+
+.nav-link:hover {
+    color: #2563eb !important;
+}
+
+.btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+    border-radius: 9px;
+    padding: 10px 22px;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+/* HERO */
+
+.result-hero {
+    padding: 150px 20px 80px;
+    background: linear-gradient(
+        135deg,
+        #eff6ff 0%,
+        #ffffff 55%,
+        #eef6ff 100%
+    );
+}
+
+.result-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: #eaf2ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.result-hero h1 {
+    margin-top: 18px;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.result-hero h1 span {
+    color: #2563eb;
+}
+
+.result-hero p {
+    max-width: 700px;
+    margin: 20px auto 0;
+    color: #64748b;
+    line-height: 1.8;
+}
+
+/* MAIN RESULT */
+
+.result-section {
+    padding: 80px 0;
+}
+
+.main-result-card {
+    padding: 40px;
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.08);
+}
+
+.recommendation-label {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.main-result-card h2 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.main-result-card p {
+    margin-top: 12px;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+.match-info,
+.career-score {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #64748b;
+}
+
+.match-info strong,
+.career-score strong {
+    color: #2563eb;
+}
+
+.progress {
+    height: 9px;
+    margin-top: 10px;
+    background: #e2e8f0;
+    border-radius: 20px;
+}
+
+.progress-bar {
+    background: #2563eb;
+    border-radius: 20px;
+}
+
+.match-circle {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    border: 12px solid #dbeafe;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.match-circle span {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.match-circle small {
+    color: #64748b;
+}
+
+/* SECTION HEADING */
+
+.section-heading {
+    margin: 70px 0 30px;
+}
+
+.section-heading > span {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+    margin-top: 10px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.section-heading p {
+    color: #64748b;
+    line-height: 1.7;
+}
+
+/* CAREER CARDS */
+
+.career-card {
+    height: 100%;
+    padding: 30px 25px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.career-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.10);
+}
+
+.career-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    border-radius: 14px;
+    font-size: 26px;
+    margin-bottom: 18px;
+}
+
+.career-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.career-card p {
+    margin-top: 10px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* SKILL SECTION */
+
+.skill-section {
+    margin-top: 70px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.skill-card span {
+    padding: 5px 10px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+/* ROADMAP */
+
+.roadmap-box {
+    margin-top: 80px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+    border: 1px solid #dbeafe;
+    border-radius: 22px;
+}
+
+.roadmap-box > div > span {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.roadmap-box h2 {
+    margin-top: 10px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.roadmap-box p {
+    margin-top: 8px;
+    color: #64748b;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 30px 0;
+    background: #172554;
+    color: white;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content p {
+    margin: 5px 0 0;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .result-hero h1 {
+        font-size: 38px;
+    }
+
+    .main-result-card {
+        padding: 25px;
+    }
+
+    .match-circle {
+        margin-top: 30px;
+    }
+
+    .roadmap-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
