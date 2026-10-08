@@ -2,6 +2,8 @@
 
 An AI-based web application that helps students identify suitable career paths based on their interests, skills, academic performance, and preferences.
 
+site is live at https://srushti-devloper0410.github.io/AI_Carrier_Guidance_System/
+
 ## 📌 Project Overview
 
 Choosing the right career can be challenging for students due to limited awareness and lack of personalized guidance.
