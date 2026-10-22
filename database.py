@@ -1,11 +1,14 @@
+import os
 import mysql.connector
 
 def get_connection():
     connection = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="ai_career_guidance"
+        host=os.environ["DB_HOST"],
+        port=int(os.environ["DB_PORT"]),
+        user=os.environ["DB_USER"],
+        password=os.environ["DB_PASSWORD"],
+        database=os.environ["DB_NAME"],
+        ssl_ca=os.environ.get("DB_SSL_CA")
     )
 
     return connection
