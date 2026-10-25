@@ -112,8 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (savedStudentId) {
 
                     response = await fetch(
-                        "http://127.0.0.1:8000/students/" +
-                        savedStudentId,
+                      "https://ai-carrier-guidance-system.onrender.com/students/" +
+                                savedStudentId,
                         {
                             method: "PUT",
 
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 else {
 
                     response = await fetch(
-                        "http://127.0.0.1:8000/students",
+                        "https://ai-carrier-guidance-system.onrender.com/students",
                         {
                             method: "POST",
 
