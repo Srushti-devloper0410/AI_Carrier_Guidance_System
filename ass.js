@@ -57,7 +57,7 @@ document
             };
 
             const assessmentResponse = await fetch(
-                "http://127.0.0.1:8000/assessments",
+                "https://ai-carrier-guidance-system.onrender.com/assessments",
                 {
                     method: "POST",
 
@@ -119,7 +119,7 @@ document
 
             const recommendationResponse =
                 await fetch(
-                    "http://127.0.0.1:8000/recommend",
+                   "https://ai-carrier-guidance-system.onrender.com/recommend",
                     {
                         method: "POST",
 
