@@ -204,7 +204,7 @@ document
 
                 const saveResponse =
                     await fetch(
-                        "http://127.0.0.1:8000/recommendations",
+                       "https://ai-carrier-guidance-system.onrender.com/recommendations",
                         {
                             method: "POST",
 
