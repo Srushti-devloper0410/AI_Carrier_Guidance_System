@@ -1,7 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from pydantic import BaseModel, EmailStr
+from pwdlib import PasswordHash
+import jwt
+from datetime import datetime, timedelta, timezone
+import os
 from recommendation import recommend_careers
 from database import get_connection
 
