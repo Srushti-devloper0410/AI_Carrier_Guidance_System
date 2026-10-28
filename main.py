@@ -9,6 +9,18 @@ import os
 from recommendation import recommend_careers
 from database import get_connection
 
+# Authentication Security Configuration
+
+password_hash = PasswordHash.recommended()
+security = HTTPBearer()
+
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+
+if not SECRET_KEY:
+    raise RuntimeError("JWT_SECRET_KEY environment variable is missing")
+
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 app = FastAPI(title="AI Career Guidance System")
 
