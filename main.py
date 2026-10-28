@@ -346,4 +346,61 @@ def save_contact_message(data: ContactMessage):
         "message": "Contact message saved successfully!",
         "message_id": message_id
     }
-    
+
+#signup data basemodel
+class SignupData(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
+
+
+@app.post("/auth/signup")
+def signup(data: SignupData):
+    if len(data.password) < 8:
+        raise HTTPException(
+            status_code=400,
+            detail="Password must contain at least 8 characters"
+        )
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute(
+            "SELECT id FROM users WHERE email = %s",
+            (str(data.email),)
+        )
+
+        if cursor.fetchone():
+            raise HTTPException(
+                status_code=409,
+                detail="Email already registered"
+            )
+
+        hashed_password = password_hash.hash(data.password)
+
+        cursor.execute(
+            """
+            INSERT INTO users (name, email, password_hash)
+            VALUES (%s, %s, %s)
+            """,
+            (data.name, str(data.email), hashed_password)
+        )
+
+        connection.commit()
+
+        return {"message": "Signup successful"}
+
+    except HTTPException:
+        connection.rollback()
+        raise
+    except Exception:
+        connection.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to create account"
+        )
+    finally:
+        cursor.close()
+        connection.close()
+
