@@ -1,3 +1,4 @@
+
 /* ================= PROFILE PAGE ================= */
 
 .profile-section {
@@ -6,8 +7,25 @@
     background: linear-gradient(135deg, #f5f9ff, #ffffff);
 }
 
+/* Profile Header */
+
 .profile-header {
     margin-bottom: 40px;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf2ff;
+    color: #2563eb;
+    border-radius: 50%;
+    font-size: 45px;
+    border: 4px solid #ffffff;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
 }
 
 .profile-badge {
@@ -39,92 +57,132 @@
     line-height: 1.7;
 }
 
+/* Profile Cards */
+
 .profile-card {
     max-width: 900px;
-    margin: auto;
-    padding: 40px;
-    background: white;
+    margin: 0 auto 25px;
+    padding: 35px 40px;
+    background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.10);
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.profile-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(37, 99, 235, 0.12);
+}
+
+/* Section Heading */
 
 .form-section {
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.form-section:last-of-type {
-    border-bottom: none;
-    margin-bottom: 0;
+    padding-bottom: 10px;
 }
 
 .form-section h3 {
     font-size: 20px;
     font-weight: 700;
     color: #172554;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
 }
 
-.form-section label {
+.form-section h3 i {
+    color: #2563eb;
+    margin-right: 8px;
+}
+
+/* Information Boxes */
+
+.info-box {
+    height: 100%;
+    padding: 17px 18px;
+    background: #f7faff;
+    border: 1px solid #e2eaf6;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.info-box:hover {
+    background: #eef5ff;
+    border-color: #bfdbfe;
+}
+
+.info-box label {
     display: block;
     margin-bottom: 8px;
-    font-size: 14px;
+    color: #64748b;
+    font-size: 13px;
     font-weight: 600;
-    color: #334155;
 }
 
-.form-control,
-.form-select {
-    min-height: 48px;
-    border: 1px solid #dbe3ee;
-    border-radius: 9px;
-    padding: 10px 14px;
+.info-box p {
+    margin: 0;
+    color: #1e3a5f;
+    font-size: 15px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
 }
 
-.form-control:focus,
-.form-select:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
-}
+/* Profile Note */
 
-.form-section small {
-    display: block;
-    margin-top: 6px;
+.profile-note {
     color: #94a3b8;
-    font-size: 12px;
+    font-size: 13px;
+    margin-top: 20px;
 }
 
-.profile-action {
-    text-align: right;
-    padding-top: 5px;
+/* Footer */
+
+footer {
+    background: #172554;
+    color: #ffffff;
+    padding: 20px 0;
+    font-size: 14px;
 }
 
-.profile-action {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-@media (max-width: 576px) {
+/* Responsive Design */
+
+@media (max-width: 768px) {
 
     .profile-section {
         padding: 120px 15px 50px;
     }
 
     .profile-header h1 {
-        font-size: 34px;
+        font-size: 36px;
     }
 
     .profile-card {
-        padding: 25px 20px;
+        padding: 28px 22px;
     }
 
-    .profile-action {
-        text-align: center;
+}
+
+@media (max-width: 576px) {
+
+    .profile-section {
+        padding: 110px 15px 40px;
     }
 
-    .profile-action .btn {
-        width: 100%;
+    .profile-header h1 {
+        font-size: 30px;
     }
+
+    .profile-avatar {
+        width: 75px;
+        height: 75px;
+        font-size: 38px;
+    }
+
+    .profile-card {
+        padding: 22px 18px;
+        border-radius: 16px;
+    }
+
+    .form-section h3 {
+        font-size: 18px;
+    }
+
 }
