@@ -404,3 +404,65 @@ def signup(data: SignupData):
         cursor.close()
         connection.close()
 
+class LoginData(BaseModel):
+    email: EmailStr
+    password: str
+
+
+@app.post("/auth/login")
+def login(data: LoginData):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            "SELECT id, name, email, password_hash, role FROM users WHERE email = %s",
+            (str(data.email),)
+        )
+        user = cursor.fetchone()
+
+        if not user or not password_hash.verify(data.password, user["password_hash"]):
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid email or password"
+            )
+
+        expire = datetime.now(timezone.utc) + timedelta(
+            minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+        )
+
+        token = jwt.encode(
+            {
+                "sub": str(user["id"]),
+                "email": user["email"],
+                "role": user["role"],
+                "exp": expire
+            },
+            SECRET_KEY,
+            algorithm=ALGORITHM
+        )
+
+        return {
+            "message": "Login successful",
+            "access_token": token,
+            "token_type": "bearer",
+            "user": {
+                "id": user["id"],
+                "name": user["name"],
+                "email": user["email"],
+                "role": user["role"]
+            }
+        }
+
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to login. Please try again."
+        )
+    finally:
+        cursor.close()
+        connection.close()
+
+
