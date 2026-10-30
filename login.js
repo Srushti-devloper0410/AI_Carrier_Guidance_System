@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             loginForm.reset();
 
             setTimeout(function () {
-                window.location.href = "profile.html";
+                window.location.href = "home.html";
             }, 1000);
 
         } catch (error) {
