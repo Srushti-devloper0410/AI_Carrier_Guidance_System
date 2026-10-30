@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.removeItem("careerResults");
 
             // Redirect to Sign Up page
-            window.location.href = "index.html";
+            window.location.href = "login.html";
         });
     }
 
