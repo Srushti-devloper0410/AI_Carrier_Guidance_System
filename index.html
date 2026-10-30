@@ -109,30 +109,7 @@
         </section>
 
     </main>
-
-    <script>
-        const signupForm = document.getElementById("signupForm");
-        const password = document.getElementById("password");
-        const confirmPassword = document.getElementById("confirmPassword");
-        const authMessage = document.getElementById("authMessage");
-
-        signupForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            authMessage.className = "auth-message";
-
-            if (password.value !== confirmPassword.value) {
-                authMessage.textContent = "Passwords do not match.";
-                authMessage.classList.add("error");
-                confirmPassword.focus();
-                return;
-            }
-
-            authMessage.textContent =
-                "UI ready. Signup API connection is the next step.";
-            authMessage.classList.add("success");
-        });
-    </script>
+<script src="index.js" defer></script>
 
 </body>
 </html>
