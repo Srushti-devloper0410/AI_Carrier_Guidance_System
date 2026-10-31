@@ -220,59 +220,68 @@ def add_student(
 # Update Existing Student Profile
 # --------------------------------
 
-@app.put("/students/{student_id}")
-def update_student(student_id: int, data: StudentProfile):
-
+@app.put("/students/me")
+def update_my_profile(
+    data: StudentProfile,
+    current_user: dict = Depends(get_current_user)
+):
     connection = get_connection()
     cursor = connection.cursor()
 
-    query = """
-        UPDATE students
-        SET
-            name = %s,
-            email = %s,
-            course = %s,
-            year = %s,
-            percentage = %s,
-            stream = %s,
-            skills = %s,
-            interest = %s
-        WHERE id = %s
-    """
+    try:
+        query = """
+            UPDATE students
+            SET
+                name = %s,
+                email = %s,
+                course = %s,
+                year = %s,
+                percentage = %s,
+                stream = %s,
+                skills = %s,
+                interest = %s
+            WHERE user_id = %s
+        """
 
-    values = (
-        data.name,
-        data.email,
-        data.course,
-        data.year,
-        data.percentage,
-        data.stream,
-        data.skills,
-        data.interest,
-        student_id
-    )
-
-    cursor.execute(query, values)
-    connection.commit()
-
-    if cursor.rowcount == 0:
-
-        cursor.close()
-        connection.close()
-
-        raise HTTPException(
-            status_code=404,
-            detail="Student not found"
+        values = (
+            current_user["name"],
+            current_user["email"],
+            data.course,
+            data.year,
+            data.percentage,
+            data.stream,
+            data.skills,
+            data.interest,
+            current_user["id"]
         )
 
-    cursor.close()
-    connection.close()
+        cursor.execute(query, values)
+        connection.commit()
 
-    return {
-        "message": "Student profile updated successfully!",
-        "student_id": student_id
-    }
+        if cursor.rowcount == 0:
+            raise HTTPException(
+                status_code=404,
+                detail="Student profile not found"
+            )
 
+        return {
+            "message": "Student profile updated successfully!"
+        }
+
+    except HTTPException:
+        connection.rollback()
+        raise
+
+    except Exception:
+        connection.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to update student profile"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
 
 # --------------------------------
 # Assessment Model
