@@ -67,6 +67,38 @@ def get_current_user(
 
 app = FastAPI(title="AI Career Guidance System")
 
+@app.get("/students/me")
+def get_my_profile(current_user: dict = Depends(get_current_user)):
+
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                id, name, email, course, year,
+                percentage, stream, skills, interest
+            FROM students
+            WHERE user_id = %s
+            """,
+            (current_user["id"],)
+        )
+
+        student = cursor.fetchone()
+
+        if not student:
+            raise HTTPException(
+                status_code=404,
+                detail="Student profile not found"
+            )
+
+        return student
+
+    finally:
+        cursor.close()
+        connection.close()
+
 
 # CORS Configuration
 app.add_middleware(
