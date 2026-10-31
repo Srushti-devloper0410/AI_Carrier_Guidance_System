@@ -30,6 +30,13 @@ document
 
         const studentId =
             localStorage.getItem("studentId");
+        const authToken = localStorage.getItem("authToken");
+
+if (!authToken) {
+    alert("Please login again.");
+    window.location.href = "login.html";
+    return;
+}
 
         if (!studentId) {
             alert(
