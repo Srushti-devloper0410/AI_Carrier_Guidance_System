@@ -69,9 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
             loginForm.reset();
 
             setTimeout(function () {
-                window.location.href = "home.html";
+                if (result.user.role === "admin") {
+                    window.location.href = "admin.html";
+                } else {
+                    window.location.href = "home.html";
+                }
             }, 1000);
-
         } catch (error) {
             console.error("Login error:", error);
 
