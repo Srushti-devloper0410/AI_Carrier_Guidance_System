@@ -172,42 +172,50 @@ def careers():
 # --------------------------------
 
 @app.post("/students")
-def add_student(data: StudentProfile):
-
+def add_student(
+    data: StudentProfile,
+    current_user: dict = Depends(get_current_user)
+):
     connection = get_connection()
     cursor = connection.cursor()
 
-    query = """
-        INSERT INTO students
-        (name, email, course, year, percentage, stream, skills, interest)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-    """
+    try:
+        query = """
+            INSERT INTO students
+            (user_id, name, email, course, year, percentage, stream, skills, interest)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
 
-    values = (
-        data.name,
-        data.email,
-        data.course,
-        data.year,
-        data.percentage,
-        data.stream,
-        data.skills,
-        data.interest
-    )
+        values = (
+            current_user["id"],
+            current_user["name"],
+            current_user["email"],
+            data.course,
+            data.year,
+            data.percentage,
+            data.stream,
+            data.skills,
+            data.interest
+        )
 
-    cursor.execute(query, values)
-    connection.commit()
+        cursor.execute(query, values)
+        connection.commit()
 
-    student_id = cursor.lastrowid
+        return {
+            "message": "Student profile saved successfully!",
+            "student_id": cursor.lastrowid
+        }
 
-    cursor.close()
-    connection.close()
+    except Exception:
+        connection.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to save student profile"
+        )
 
-    return {
-        "message": "Student profile saved successfully!",
-        "student_id": student_id
-    }
-
-
+    finally:
+        cursor.close()
+        connection.close()
 # --------------------------------
 # Update Existing Student Profile
 # --------------------------------
