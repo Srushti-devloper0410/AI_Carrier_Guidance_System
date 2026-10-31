@@ -703,3 +703,89 @@ def get_admin_dashboard(
         cursor.close()
         connection.close()
 
+
+    
+# =========================================
+# ADMIN STUDENTS MANAGEMENT
+# =========================================
+
+@app.get("/admin/students")
+def get_all_students(
+    search: str = "",
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        query = """
+            SELECT
+                id, name, email, course, year,
+                percentage, stream, skills, interest
+            FROM students
+            WHERE name LIKE %s OR email LIKE %s
+            ORDER BY id DESC
+        """
+
+        search_value = f"%{search.strip()}%"
+        cursor.execute(query, (search_value, search_value))
+
+        return {
+            "students": cursor.fetchall()
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch students"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@app.get("/admin/students/{student_id}")
+def get_student_details(
+    student_id: int,
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                id, name, email, course, year,
+                percentage, stream, skills, interest
+            FROM students
+            WHERE id = %s
+            """,
+            (student_id,)
+        )
+
+        student = cursor.fetchone()
+
+        if not student:
+            raise HTTPException(
+                status_code=404,
+                detail="Student not found"
+            )
+
+        return {"student": student}
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch student details"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
