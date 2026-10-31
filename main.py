@@ -789,3 +789,411 @@ def get_student_details(
         connection.close()
 
 
+# =========================================
+# ADMIN DELETE STUDENT
+# =========================================
+
+@app.delete("/admin/students/{student_id}")
+def delete_student(
+    student_id: int,
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        # Check whether student exists
+        cursor.execute(
+            "SELECT id FROM students WHERE id = %s",
+            (student_id,)
+        )
+
+        student = cursor.fetchone()
+
+        if not student:
+            raise HTTPException(
+                status_code=404,
+                detail="Student not found"
+            )
+
+        # Delete related assessments
+        cursor.execute(
+            "DELETE FROM assessments WHERE student_id = %s",
+            (student_id,)
+        )
+
+        # Delete related recommendations
+        cursor.execute(
+            "DELETE FROM recommendations WHERE student_id = %s",
+            (student_id,)
+        )
+
+        # Delete student profile
+        cursor.execute(
+            "DELETE FROM students WHERE id = %s",
+            (student_id,)
+        )
+
+        connection.commit()
+
+        return {
+            "message": "Student and related records deleted successfully"
+        }
+
+    except HTTPException:
+        connection.rollback()
+        raise
+
+    except Exception:
+        connection.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to delete student"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+    # =========================================
+# ADMIN ASSESSMENTS MANAGEMENT
+# =========================================
+
+@app.get("/admin/assessments")
+def get_all_assessments(
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                assessments.id,
+                assessments.student_id,
+                students.name AS student_name,
+                students.email AS student_email,
+                assessments.interest,
+                assessments.activity,
+                assessments.technology,
+                assessments.skill,
+                assessments.career,
+                assessments.problem,
+                assessments.created_at
+            FROM assessments
+            LEFT JOIN students
+                ON assessments.student_id = students.id
+            ORDER BY assessments.id DESC
+            """
+        )
+
+        return {
+            "assessments": cursor.fetchall()
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch assessments"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@app.get("/admin/assessments/{assessment_id}")
+def get_assessment_details(
+    assessment_id: int,
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                assessments.*,
+                students.name AS student_name,
+                students.email AS student_email
+            FROM assessments
+            LEFT JOIN students
+                ON assessments.student_id = students.id
+            WHERE assessments.id = %s
+            """,
+            (assessment_id,)
+        )
+
+        assessment = cursor.fetchone()
+
+        if not assessment:
+            raise HTTPException(
+                status_code=404,
+                detail="Assessment not found"
+            )
+
+        return {"assessment": assessment}
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch assessment details"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+    # =========================================
+# ADMIN RECOMMENDATIONS MANAGEMENT
+# =========================================
+
+@app.get("/admin/recommendations")
+def get_all_recommendations(
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                recommendations.id,
+                recommendations.student_id,
+                students.name AS student_name,
+                students.email AS student_email,
+                recommendations.career,
+                recommendations.match_score,
+                recommendations.created_at
+            FROM recommendations
+            LEFT JOIN students
+                ON recommendations.student_id = students.id
+            ORDER BY recommendations.id DESC
+            """
+        )
+
+        return {
+            "recommendations": cursor.fetchall()
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch recommendations"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@app.get("/admin/recommendations/{recommendation_id}")
+def get_recommendation_details(
+    recommendation_id: int,
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                recommendations.*,
+                students.name AS student_name,
+                students.email AS student_email
+            FROM recommendations
+            LEFT JOIN students
+                ON recommendations.student_id = students.id
+            WHERE recommendations.id = %s
+            """,
+            (recommendation_id,)
+        )
+
+        recommendation = cursor.fetchone()
+
+        if not recommendation:
+            raise HTTPException(
+                status_code=404,
+                detail="Recommendation not found"
+            )
+
+        return {"recommendation": recommendation}
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch recommendation details"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+    # =========================================
+# ADMIN USERS MANAGEMENT
+# =========================================
+
+@app.get("/admin/users")
+def get_all_users(
+    search: str = "",
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        search_value = f"%{search.strip()}%"
+
+        cursor.execute(
+            """
+            SELECT id, name, email, role, created_at
+            FROM users
+            WHERE name LIKE %s
+               OR email LIKE %s
+               OR role LIKE %s
+            ORDER BY id DESC
+            """,
+            (search_value, search_value, search_value)
+        )
+
+        return {"users": cursor.fetchall()}
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch users"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@app.get("/admin/users/{user_id}")
+def get_user_details(
+    user_id: int,
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT id, name, email, role, created_at
+            FROM users
+            WHERE id = %s
+            """,
+            (user_id,)
+        )
+
+        user = cursor.fetchone()
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found"
+            )
+
+        return {"user": user}
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch user details"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+    # =========================================
+# ADMIN MESSAGES MANAGEMENT
+# =========================================
+
+@app.get("/admin/messages")
+def get_all_messages(
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                id, name, email, subject, message, created_at
+            FROM contact_messages
+            ORDER BY id DESC
+            """
+        )
+
+        return {"messages": cursor.fetchall()}
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch messages"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@app.get("/admin/messages/{message_id}")
+def get_message_details(
+    message_id: int,
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute(
+            """
+            SELECT
+                id, name, email, subject, message, created_at
+            FROM contact_messages
+            WHERE id = %s
+            """,
+            (message_id,)
+        )
+
+        message = cursor.fetchone()
+
+        if not message:
+            raise HTTPException(
+                status_code=404,
+                detail="Message not found"
+            )
+
+        return {"message": message}
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to fetch message details"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
+
