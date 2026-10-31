@@ -558,3 +558,148 @@ def login(data: LoginData):
         connection.close()
 
 
+# =========================================
+# ADMIN AUTHENTICATION
+# =========================================
+
+def get_current_admin(
+    current_user: dict = Depends(get_current_user)
+):
+    if current_user["role"] != "admin":
+        raise HTTPException(
+            status_code=403,
+            detail="Access denied. Admin permission required."
+        )
+
+    return current_user
+
+
+# =========================================
+# ADMIN DASHBOARD API
+# =========================================
+
+@app.get("/admin/dashboard")
+def get_admin_dashboard(
+    admin: dict = Depends(get_current_admin)
+):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        # Dashboard Statistics
+        cursor.execute("SELECT COUNT(*) AS total FROM students")
+        total_students = cursor.fetchone()["total"]
+
+        cursor.execute("SELECT COUNT(*) AS total FROM assessments")
+        total_assessments = cursor.fetchone()["total"]
+
+        cursor.execute("SELECT COUNT(*) AS total FROM recommendations")
+        total_recommendations = cursor.fetchone()["total"]
+
+        cursor.execute("SELECT COUNT(*) AS total FROM contact_messages")
+        total_messages = cursor.fetchone()["total"]
+
+        cursor.execute("SELECT COUNT(*) AS total FROM users")
+        total_users = cursor.fetchone()["total"]
+
+        # Recent Students
+        cursor.execute("""
+            SELECT
+                id,
+                name,
+                email,
+                course,
+                year,
+                percentage,
+                stream
+            FROM students
+            ORDER BY id DESC
+            LIMIT 10
+        """)
+        recent_students = cursor.fetchall()
+
+        # Recent Assessments
+        cursor.execute("""
+            SELECT
+                a.id,
+                a.student_id,
+                s.name AS student_name,
+                a.career,
+                a.created_at
+            FROM assessments a
+            LEFT JOIN students s ON a.student_id = s.id
+            ORDER BY a.id DESC
+            LIMIT 10
+        """)
+        recent_assessments = cursor.fetchall()
+
+        # Recent Recommendations
+        cursor.execute("""
+            SELECT
+                r.id,
+                r.student_id,
+                s.name AS student_name,
+                r.career,
+                r.match_score,
+                r.created_at
+            FROM recommendations r
+            LEFT JOIN students s ON r.student_id = s.id
+            ORDER BY r.id DESC
+            LIMIT 10
+        """)
+        recent_recommendations = cursor.fetchall()
+
+        # Recent Contact Messages
+        cursor.execute("""
+            SELECT
+                id,
+                name,
+                email,
+                subject,
+                message,
+                created_at
+            FROM contact_messages
+            ORDER BY id DESC
+            LIMIT 10
+        """)
+        recent_messages = cursor.fetchall()
+
+        # Recent Users
+        cursor.execute("""
+            SELECT
+                id,
+                name,
+                email,
+                role,
+                created_at
+            FROM users
+            ORDER BY id DESC
+            LIMIT 10
+        """)
+        recent_users = cursor.fetchall()
+
+        return {
+            "statistics": {
+                "total_students": total_students,
+                "total_assessments": total_assessments,
+                "total_recommendations": total_recommendations,
+                "total_messages": total_messages,
+                "total_users": total_users
+            },
+            "recent_students": recent_students,
+            "recent_assessments": recent_assessments,
+            "recent_recommendations": recent_recommendations,
+            "recent_messages": recent_messages,
+            "recent_users": recent_users
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to load admin dashboard data"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
