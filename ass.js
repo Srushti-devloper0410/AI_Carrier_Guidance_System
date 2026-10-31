@@ -68,9 +68,10 @@ if (!authToken) {
                 {
                     method: "POST",
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                   headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`
+                },
 
                     body: JSON.stringify(
                         assessmentData
