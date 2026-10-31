@@ -1,25 +1,53 @@
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
 
-    // Get logged-in user information
-    const savedProfile = localStorage.getItem("studentProfile");
+    // Get JWT token
+    const token = localStorage.getItem("authToken");
 
-    if (!savedProfile) {
+    if (!token) {
         window.location.href = "login.html";
         return;
     }
 
     try {
-        const profile = JSON.parse(savedProfile);
+        // Fetch logged-in user's profile from backend
+        const response = await fetch(
+            "https://ai-carrier-guidance-system.onrender.com/students/me",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
 
-        // Display Personal Information
+        if (response.status === 401) {
+            alert("Session expired. Please login again.");
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("authUser");
+            window.location.href = "login.html";
+            return;
+        }
+
+        if (response.status === 404) {
+            alert("Your student profile is not created yet.");
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch profile information.");
+        }
+
+        const profile = await response.json();
+
+        // Personal Information
         document.getElementById("profileName").textContent =
             profile.name || "Not added yet";
 
         document.getElementById("profileEmail").textContent =
             profile.email || "Not added yet";
 
-        // Display Academic Information
+        // Academic Information
         document.getElementById("profileCourse").textContent =
             profile.course || "Not added yet";
 
@@ -27,14 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
             profile.year || "Not added yet";
 
         document.getElementById("profilePercentage").textContent =
-            profile.percentage !== undefined && profile.percentage !== null
+            profile.percentage !== null && profile.percentage !== undefined
                 ? profile.percentage + "%"
                 : "Not added yet";
 
         document.getElementById("profileStream").textContent =
             profile.stream || "Not added yet";
 
-        // Display Skills and Interests
+        // Skills and Interests
         document.getElementById("profileSkills").textContent =
             profile.skills || "Not added yet";
 
@@ -42,10 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
             profile.interest || "Not added yet";
 
     } catch (error) {
-        console.error("Unable to load profile:", error);
-        alert("Unable to load profile information. Please sign in again.");
-        localStorage.removeItem("studentProfile");
-        window.location.href = "login.html";
+        console.error("Profile loading error:", error);
+        alert("Unable to load profile. Please try again later.");
     }
 
 });
