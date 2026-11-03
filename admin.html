@@ -169,39 +169,68 @@
             </div>
 
             <!-- Students -->
-            <section class="dashboard-card table-card" id="students">
+        
+<!-- Students Management -->
+<section class="dashboard-card table-card" id="students">
 
-                <div class="card-heading">
-                    <div>
-                        <h5>Recent Students</h5>
-                        <p>Recently registered student accounts</p>
-                    </div>
-                    <a href="#students" class="view-all">View All</a>
-                </div>
+    <div class="card-heading">
+        <div>
+            <h5>Students Management</h5>
+            <p>View, search and manage registered students</p>
+        </div>
+    </div>
 
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Student Name</th>
-                                <th>Email</th>
-                                <th>Course</th>
-                                <th>Year</th>
-                            </tr>
-                        </thead>
+    <!-- Search -->
+    <div class="student-toolbar">
+        <input
+            type="text"
+            id="studentSearch"
+            class="form-control"
+            placeholder="Search by student name or email..."
+        >
 
-                        <tbody id="recentStudents">
-                            <tr>
-                                <td colspan="5" class="text-center">
-                                    Student data will appear here.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="searchStudentBtn"
+        >
+            Search
+        </button>
 
-            </section>
+        <button
+            type="button"
+            class="btn btn-outline-secondary"
+            id="resetStudentSearch"
+        >
+            Reset
+        </button>
+    </div>
+
+    <!-- Students Table -->
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Year</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="studentsTableBody">
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Loading students...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
 
             <!-- Assessments -->
             <section class="dashboard-card table-card" id="assessments">
