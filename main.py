@@ -337,71 +337,76 @@ def add_assessment(data: AssessmentData):
     }
 
 
-# --------------------------------
-# Recommendation Data Model
-# --------------------------------
-
-class RecommendationData(BaseModel):
-    student_id: int
-    career: str
-    match_score: int
-
-
-# --------------------------------
-# Career Recommendation
-# --------------------------------
-
-@app.post("/recommend")
-def get_recommendation(data: CareerRequest):
-
-    results = recommend_careers(
-        data.interest,
-        data.activity,
-        data.technology,
-        data.skill,
-        data.career_area,
-        data.problem
-    )
-
-    return {
-        "recommendations": results
-    }
-
 
 # --------------------------------
 # Save Career Recommendations
 # --------------------------------
 
 @app.post("/recommendations")
-def add_recommendation(data: RecommendationData):
-
+def add_recommendation(
+    data: RecommendationData,
+    current_user: dict = Depends(get_current_user)
+):
     connection = get_connection()
     cursor = connection.cursor()
 
-    query = """
-        INSERT INTO recommendations
-        (student_id, career, match_score)
-        VALUES (%s, %s, %s)
-    """
+    try:
+        # Verify student ownership
+        cursor.execute(
+            """
+            SELECT id
+            FROM students
+            WHERE id = %s AND user_id = %s
+            """,
+            (data.student_id, current_user["id"])
+        )
 
-    values = (
-        data.student_id,
-        data.career,
-        data.match_score
-    )
+        student = cursor.fetchone()
 
-    cursor.execute(query, values)
-    connection.commit()
+        if not student:
+            raise HTTPException(
+                status_code=403,
+                detail="You can only save recommendations for your own profile"
+            )
 
-    recommendation_id = cursor.lastrowid
+        # Save recommendation
+        query = """
+            INSERT INTO recommendations
+            (student_id, career, match_score)
+            VALUES (%s, %s, %s)
+        """
 
-    cursor.close()
-    connection.close()
+        values = (
+            data.student_id,
+            data.career,
+            data.match_score
+        )
 
-    return {
-        "message": "Recommendation saved successfully!",
-        "recommendation_id": recommendation_id
-    }
+        cursor.execute(query, values)
+        connection.commit()
+
+        recommendation_id = cursor.lastrowid
+
+        return {
+            "message": "Recommendation saved successfully!",
+            "recommendation_id": recommendation_id
+        }
+
+    except HTTPException:
+        connection.rollback()
+        raise
+
+    except Exception:
+        connection.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to save recommendation"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
+
 
 class ContactMessage(BaseModel):
     name:str
