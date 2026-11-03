@@ -220,6 +220,7 @@ def add_student(
 # Update Existing Student Profile
 # --------------------------------
 
+
 @app.put("/students/me")
 def update_my_profile(
     data: StudentProfile,
@@ -229,6 +230,21 @@ def update_my_profile(
     cursor = connection.cursor()
 
     try:
+        # Check whether student profile exists
+        cursor.execute(
+            "SELECT id FROM students WHERE user_id = %s",
+            (current_user["id"],)
+        )
+
+        student = cursor.fetchone()
+
+        if not student:
+            raise HTTPException(
+                status_code=404,
+                detail="Student profile not found"
+            )
+
+        # Update student profile
         query = """
             UPDATE students
             SET
@@ -258,12 +274,6 @@ def update_my_profile(
         cursor.execute(query, values)
         connection.commit()
 
-        if cursor.rowcount == 0:
-            raise HTTPException(
-                status_code=404,
-                detail="Student profile not found"
-            )
-
         return {
             "message": "Student profile updated successfully!"
         }
@@ -282,6 +292,7 @@ def update_my_profile(
     finally:
         cursor.close()
         connection.close()
+
 
 # --------------------------------
 # Assessment Model
@@ -302,39 +313,74 @@ class AssessmentData(BaseModel):
 # --------------------------------
 
 @app.post("/assessments")
-def add_assessment(data: AssessmentData):
+def add_assessment(
+    data: AssessmentData,
+    current_user: dict = Depends(get_current_user)
+):
 
     connection = get_connection()
     cursor = connection.cursor()
 
-    query = """
-        INSERT INTO assessments
-        (student_id, interest, activity, technology, skill, career, problem)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """
+    try:
+        # Verify student ownership
+        cursor.execute(
+            """
+            SELECT id
+            FROM students
+            WHERE id = %s AND user_id = %s
+            """,
+            (data.student_id, current_user["id"])
+        )
 
-    values = (
-        data.student_id,
-        data.interest,
-        data.activity,
-        data.technology,
-        data.skill,
-        data.career,
-        data.problem
-    )
+        student = cursor.fetchone()
 
-    cursor.execute(query, values)
-    connection.commit()
+        if not student:
+            raise HTTPException(
+                status_code=403,
+                detail="You can only save assessments for your own profile"
+            )
 
-    assessment_id = cursor.lastrowid
+        # Save Assessment
+        query = """
+            INSERT INTO assessments
+            (student_id, interest, activity, technology, skill, career, problem)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """
 
-    cursor.close()
-    connection.close()
+        values = (
+            data.student_id,
+            data.interest,
+            data.activity,
+            data.technology,
+            data.skill,
+            data.career,
+            data.problem
+        )
 
-    return {
-        "message": "Assessment saved successfully!",
-        "assessment_id": assessment_id
-    }
+        cursor.execute(query, values)
+        connection.commit()
+
+        assessment_id = cursor.lastrowid
+
+        return {
+            "message": "Assessment saved successfully!",
+            "assessment_id": assessment_id
+        }
+
+    except HTTPException:
+        connection.rollback()
+        raise
+
+    except Exception:
+        connection.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to save assessment"
+        )
+
+    finally:
+        cursor.close()
+        connection.close()
 
 
 
