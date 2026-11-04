@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
     
-    ```javascript
+
 // =========================================
 // ASSESSMENTS MANAGEMENT
 // =========================================
@@ -652,7 +652,162 @@ assessmentsTableBody?.addEventListener("click", async function (event) {
         alert("Unable to load assessment details.");
     }
 });
-```
+// =========================================
+// RECOMMENDATIONS MANAGEMENT
+// =========================================
+
+const recommendationsTableBody = document.getElementById("recommendationsTableBody");
+
+async function loadRecommendations() {
+    if (!recommendationsTableBody) return;
+
+    recommendationsTableBody.replaceChildren();
+
+    const loadingRow = document.createElement("tr");
+    const loadingCell = document.createElement("td");
+    loadingCell.colSpan = 7;
+    loadingCell.textContent = "Loading recommendations...";
+    loadingCell.className = "text-center";
+    loadingRow.appendChild(loadingCell);
+    recommendationsTableBody.appendChild(loadingRow);
+
+    try {
+        const response = await fetch(`${API_URL}/admin/recommendations`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.status === 401) {
+            alert("Session expired. Please login again.");
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("authUser");
+            window.location.href = "index.html";
+            return;
+        }
+
+        if (response.status === 403) {
+            alert("Admin permission required.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error("Failed to load recommendations.");
+        }
+
+        const data = await response.json();
+        const recommendations = data.recommendations || [];
+
+        recommendationsTableBody.replaceChildren();
+
+        if (recommendations.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 7;
+            cell.textContent = "No recommendations found.";
+            cell.className = "text-center";
+            row.appendChild(cell);
+            recommendationsTableBody.appendChild(row);
+            return;
+        }
+
+        recommendations.forEach(recommendation => {
+            const row = document.createElement("tr");
+
+            const values = [
+                recommendation.id,
+                recommendation.student_name,
+                recommendation.email,
+                recommendation.career,
+                recommendation.match_score,
+                recommendation.created_at
+                    ? new Date(recommendation.created_at).toLocaleDateString()
+                    : "N/A"
+            ];
+
+            values.forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value ?? "N/A";
+                row.appendChild(cell);
+            });
+
+            const actionCell = document.createElement("td");
+            const viewButton = document.createElement("button");
+
+            viewButton.textContent = "View Details";
+            viewButton.className = "btn btn-sm btn-primary";
+            viewButton.dataset.action = "view-recommendation";
+            viewButton.dataset.recommendationId = recommendation.id;
+
+            actionCell.appendChild(viewButton);
+            row.appendChild(actionCell);
+
+            recommendationsTableBody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Recommendations error:", error);
+
+        recommendationsTableBody.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 7;
+        cell.textContent = "Error loading recommendations.";
+        cell.className = "text-center text-danger";
+        row.appendChild(cell);
+        recommendationsTableBody.appendChild(row);
+    }
+}
+
+// View Recommendation Details
+recommendationsTableBody?.addEventListener("click", async function (event) {
+    const button = event.target.closest('[data-action="view-recommendation"]');
+
+    if (!button) return;
+
+    const recommendationId = button.dataset.recommendationId;
+
+    try {
+        const response = await fetch(
+            `${API_URL}/admin/recommendations/${recommendationId}`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch recommendation details.");
+        }
+
+        const data = await response.json();
+        const recommendation = data.recommendation || data;
+
+        const details = [
+            `Recommendation ID: ${recommendation.id ?? "N/A"}`,
+            `Student Name: ${recommendation.student_name ?? "N/A"}`,
+            `Email: ${recommendation.email ?? "N/A"}`,
+            `Career: ${recommendation.career ?? "N/A"}`,
+            `Match Score: ${recommendation.match_score ?? "N/A"}`,
+            `Skills: ${recommendation.skills ?? "N/A"}`,
+            `Description: ${recommendation.description ?? "N/A"}`,
+            `Created At: ${recommendation.created_at ?? "N/A"}`
+        ].join("\n");
+
+        alert(details);
+
+    } catch (error) {
+        console.error("Recommendation details error:", error);
+        alert("Unable to load recommendation details.");
+    }
+});
 
     
     // Sidebar active link
@@ -685,4 +840,5 @@ assessmentsTableBody?.addEventListener("click", async function (event) {
 await loadDashboard();
 await loadStudents();
 await loadAssessments();
+await loadRecommendations();
 });
