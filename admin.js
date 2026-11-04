@@ -493,8 +493,168 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         });
     }
+    
+    ```javascript
+// =========================================
+// ASSESSMENTS MANAGEMENT
+// =========================================
 
+const assessmentsTableBody = document.getElementById("assessmentsTableBody");
 
+async function loadAssessments() {
+    if (!assessmentsTableBody) return;
+
+    assessmentsTableBody.replaceChildren();
+
+    const loadingRow = document.createElement("tr");
+    const loadingCell = document.createElement("td");
+    loadingCell.colSpan = 6;
+    loadingCell.textContent = "Loading assessments...";
+    loadingCell.className = "text-center";
+    loadingRow.appendChild(loadingCell);
+    assessmentsTableBody.appendChild(loadingRow);
+
+    try {
+        const response = await fetch(`${API_URL}/admin/assessments`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.status === 401) {
+            alert("Session expired. Please login again.");
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("authUser");
+            window.location.href = "index.html";
+            return;
+        }
+
+        if (response.status === 403) {
+            alert("Admin permission required.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error("Failed to load assessments.");
+        }
+
+        const data = await response.json();
+        const assessments = data.assessments || [];
+
+        assessmentsTableBody.replaceChildren();
+
+        if (assessments.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 6;
+            cell.textContent = "No assessments found.";
+            cell.className = "text-center";
+            row.appendChild(cell);
+            assessmentsTableBody.appendChild(row);
+            return;
+        }
+
+        assessments.forEach(assessment => {
+            const row = document.createElement("tr");
+
+            const values = [
+                assessment.id,
+                assessment.student_name,
+                assessment.email,
+                assessment.career,
+                assessment.created_at
+                    ? new Date(assessment.created_at).toLocaleDateString()
+                    : "N/A"
+            ];
+
+            values.forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value ?? "N/A";
+                row.appendChild(cell);
+            });
+
+            const actionCell = document.createElement("td");
+            const viewButton = document.createElement("button");
+
+            viewButton.textContent = "View Details";
+            viewButton.className = "btn btn-sm btn-primary";
+            viewButton.dataset.action = "view-assessment";
+            viewButton.dataset.assessmentId = assessment.id;
+
+            actionCell.appendChild(viewButton);
+            row.appendChild(actionCell);
+
+            assessmentsTableBody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Assessments error:", error);
+
+        assessmentsTableBody.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 6;
+        cell.textContent = "Error loading assessments.";
+        cell.className = "text-center text-danger";
+        row.appendChild(cell);
+        assessmentsTableBody.appendChild(row);
+    }
+}
+
+// View Assessment Details
+assessmentsTableBody?.addEventListener("click", async function (event) {
+    const button = event.target.closest('[data-action="view-assessment"]');
+
+    if (!button) return;
+
+    const assessmentId = button.dataset.assessmentId;
+
+    try {
+        const response = await fetch(
+            `${API_URL}/admin/assessments/${assessmentId}`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch assessment details.");
+        }
+
+        const data = await response.json();
+        const assessment = data.assessment || data;
+
+        const details = [
+            `Assessment ID: ${assessment.id ?? "N/A"}`,
+            `Student Name: ${assessment.student_name ?? "N/A"}`,
+            `Email: ${assessment.email ?? "N/A"}`,
+            `Interest: ${assessment.interest ?? "N/A"}`,
+            `Activity: ${assessment.activity ?? "N/A"}`,
+            `Technology: ${assessment.technology ?? "N/A"}`,
+            `Skill: ${assessment.skill ?? "N/A"}`,
+            `Career: ${assessment.career ?? "N/A"}`,
+            `Problem: ${assessment.problem ?? "N/A"}`,
+            `Created At: ${assessment.created_at ?? "N/A"}`
+        ].join("\n");
+
+        alert(details);
+
+    } catch (error) {
+        console.error("Assessment details error:", error);
+        alert("Unable to load assessment details.");
+    }
+});
+```
+
+    
     // Sidebar active link
     document.querySelectorAll(".sidebar-link").forEach(function (link) {
         link.addEventListener("click", function () {
@@ -524,4 +684,5 @@ document.addEventListener("DOMContentLoaded", async function () {
 // Load dashboard and students
 await loadDashboard();
 await loadStudents();
+await loadAssessments();
 });
