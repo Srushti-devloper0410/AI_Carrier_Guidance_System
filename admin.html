@@ -232,7 +232,7 @@
 
 </section>
 
-           ```html
+
 <!-- Assessments Management -->
 <section class="dashboard-card table-card" id="assessments">
 
@@ -267,42 +267,45 @@
     </div>
 
 </section>
-```
 
-            <!-- Recommendations -->
-            <section class="dashboard-card table-card" id="recommendations">
 
-                <div class="card-heading">
-                    <div>
-                        <h5>Career Recommendations</h5>
-                        <p>Recently generated career suggestions</p>
-                    </div>
-                    <a href="#recommendations" class="view-all">View All</a>
-                </div>
 
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th>Recommendation ID</th>
-                                <th>Student</th>
-                                <th>Career</th>
-                                <th>Match Score</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
+<!-- Recommendations Management -->
+<section class="dashboard-card table-card" id="recommendations">
 
-                        <tbody id="recentRecommendations">
-                            <tr>
-                                <td colspan="5" class="text-center">
-                                    Recommendation data will appear here.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="card-heading">
+        <div>
+            <h5>Recommendations Management</h5>
+            <p>View generated career recommendations and match scores</p>
+        </div>
+    </div>
 
-            </section>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Recommendation ID</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Career</th>
+                    <th>Match Score</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="recommendationsTableBody">
+                <tr>
+                    <td colspan="7" class="text-center">
+                        Loading recommendations...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
 
             <!-- Users -->
             <section class="dashboard-card table-card" id="users">
