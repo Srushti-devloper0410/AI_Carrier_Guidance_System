@@ -232,39 +232,42 @@
 
 </section>
 
-            <!-- Assessments -->
-            <section class="dashboard-card table-card" id="assessments">
+           ```html
+<!-- Assessments Management -->
+<section class="dashboard-card table-card" id="assessments">
 
-                <div class="card-heading">
-                    <div>
-                        <h5>Recent Assessments</h5>
-                        <p>Latest student assessments</p>
-                    </div>
-                    <a href="#assessments" class="view-all">View All</a>
-                </div>
+    <div class="card-heading">
+        <div>
+            <h5>Assessments Management</h5>
+            <p>View all student assessments and their details</p>
+        </div>
+    </div>
 
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th>Assessment ID</th>
-                                <th>Student</th>
-                                <th>Career</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Assessment ID</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Career</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-                        <tbody id="recentAssessments">
-                            <tr>
-                                <td colspan="4" class="text-center">
-                                    Assessment data will appear here.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <tbody id="assessmentsTableBody">
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Loading assessments...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-            </section>
+</section>
+```
 
             <!-- Recommendations -->
             <section class="dashboard-card table-card" id="recommendations">
