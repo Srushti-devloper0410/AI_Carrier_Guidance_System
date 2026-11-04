@@ -254,6 +254,247 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
+    
+    // =========================================
+    // STUDENTS MANAGEMENT
+    // =========================================
+
+    const studentsTableBody = document.getElementById("studentsTableBody");
+    const studentSearch = document.getElementById("studentSearch");
+    const searchStudentBtn = document.getElementById("searchStudentBtn");
+    const resetStudentSearch = document.getElementById("resetStudentSearch");
+
+    // Load students from backend
+    async function loadStudents(search = "") {
+        if (!studentsTableBody) return;
+
+        studentsTableBody.replaceChildren();
+
+        const loadingRow = document.createElement("tr");
+        const loadingCell = document.createElement("td");
+        loadingCell.colSpan = 6;
+        loadingCell.textContent = "Loading students...";
+        loadingCell.className = "text-center";
+        loadingRow.appendChild(loadingCell);
+        studentsTableBody.appendChild(loadingRow);
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/students?search=${encodeURIComponent(search)}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+
+            if (response.status === 401) {
+                alert("Session expired. Please login again.");
+                localStorage.removeItem("authToken");
+                localStorage.removeItem("authUser");
+                window.location.href = "login.html";
+                return;
+            }
+
+            if (response.status === 403) {
+                alert("Admin permission required.");
+                window.location.href = "index.html";
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error("Unable to load students.");
+            }
+
+            const data = await response.json();
+            const students = data.students || [];
+
+            studentsTableBody.replaceChildren();
+
+            if (students.length === 0) {
+                const row = document.createElement("tr");
+                const cell = document.createElement("td");
+
+                cell.colSpan = 6;
+                cell.textContent = "No students found.";
+                cell.className = "text-center text-muted";
+
+                row.appendChild(cell);
+                studentsTableBody.appendChild(row);
+                return;
+            }
+
+            students.forEach(function (student) {
+                const row = document.createElement("tr");
+
+                ["id", "name", "email", "course", "year"].forEach(function (column) {
+                    const cell = document.createElement("td");
+                    cell.textContent = student[column] ?? "-";
+                    row.appendChild(cell);
+                });
+
+                // Actions cell
+                const actionsCell = document.createElement("td");
+
+                const viewButton = document.createElement("button");
+                viewButton.type = "button";
+                viewButton.textContent = "View";
+                viewButton.className = "btn btn-sm btn-info me-2";
+                viewButton.dataset.action = "view";
+                viewButton.dataset.studentId = student.id;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "btn btn-sm btn-danger";
+                deleteButton.dataset.action = "delete";
+                deleteButton.dataset.studentId = student.id;
+
+                actionsCell.appendChild(viewButton);
+                actionsCell.appendChild(deleteButton);
+                row.appendChild(actionsCell);
+
+                studentsTableBody.appendChild(row);
+            });
+
+        } catch (error) {
+            console.error("Students Management Error:", error);
+
+            studentsTableBody.replaceChildren();
+
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 6;
+            cell.textContent = "Unable to load students. Please try again.";
+            cell.className = "text-center text-danger";
+
+            row.appendChild(cell);
+            studentsTableBody.appendChild(row);
+        }
+    }
+
+    // Search students
+    if (searchStudentBtn) {
+        searchStudentBtn.addEventListener("click", function () {
+            loadStudents(studentSearch ? studentSearch.value.trim() : "");
+        });
+    }
+
+    // Search on Enter key
+    if (studentSearch) {
+        studentSearch.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                loadStudents(studentSearch.value.trim());
+            }
+        });
+    }
+
+    // Reset search
+    if (resetStudentSearch) {
+        resetStudentSearch.addEventListener("click", function () {
+            if (studentSearch) {
+                studentSearch.value = "";
+            }
+
+            loadStudents();
+        });
+    }
+
+    // View and Delete student actions
+    if (studentsTableBody) {
+        studentsTableBody.addEventListener("click", async function (event) {
+            const button = event.target.closest("button[data-action]");
+
+            if (!button) return;
+
+            const studentId = button.dataset.studentId;
+            const action = button.dataset.action;
+
+            // View student details
+            if (action === "view") {
+                try {
+                    const response = await fetch(
+                        `${API_URL}/admin/students/${studentId}`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Unable to fetch student details.");
+                    }
+
+                    const data = await response.json();
+                    const student = data.student;
+
+                    alert(
+                        `Student Details\n\n` +
+                        `ID: ${student.id}\n` +
+                        `Name: ${student.name}\n` +
+                        `Email: ${student.email}\n` +
+                        `Course: ${student.course || "-"}\n` +
+                        `Year: ${student.year || "-"}\n` +
+                        `Percentage: ${student.percentage ?? "-"}\n` +
+                        `Stream: ${student.stream || "-"}\n` +
+                        `Skills: ${student.skills || "-"}\n` +
+                        `Interest: ${student.interest || "-"}`
+                    );
+
+                } catch (error) {
+                    console.error("Student Details Error:", error);
+                    alert("Unable to display student details.");
+                }
+            }
+
+            // Delete student
+            if (action === "delete") {
+                const confirmed = confirm(
+                    `Are you sure you want to delete student ID ${studentId}?\n\n` +
+                    `Related assessments and recommendations will also be deleted.`
+                );
+
+                if (!confirmed) return;
+
+                try {
+                    const response = await fetch(
+                        `${API_URL}/admin/students/${studentId}`,
+                        {
+                            method: "DELETE",
+                            headers: {
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Unable to delete student.");
+                    }
+
+                    alert("Student deleted successfully!");
+
+                    loadStudents(studentSearch ? studentSearch.value.trim() : "");
+
+                    // Refresh dashboard statistics and recent records
+                    await loadDashboard();
+
+                } catch (error) {
+                    console.error("Delete Student Error:", error);
+                    alert("Student could not be deleted.");
+                }
+            }
+        });
+    }
+
+
     // Sidebar active link
     document.querySelectorAll(".sidebar-link").forEach(function (link) {
         link.addEventListener("click", function () {
@@ -280,6 +521,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
-    // Load dashboard
-    await loadDashboard();
+// Load dashboard and students
+await loadDashboard();
+await loadStudents();
 });
