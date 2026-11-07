@@ -94,7 +94,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             if (response.status === 401) {
                 alert("Session expired. Please login again.");
-                localStorage.clear();
+                localStorage.removeItem("authToken");
+                localStorage.removeItem("authUser");
+                localStorage.removeItem("studentProfile");
+                localStorage.removeItem("studentId");
+                localStorage.removeItem("careerResults");
                 window.location.href = "login.html";
                 return;
             }
