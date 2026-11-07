@@ -28,11 +28,12 @@ def get_current_user(
     token = credentials.credentials
 
     try:
-        payload = jwt.decode(
-            token,
-            SECRET_KEY,
-            algorithms=[ALGORITHM]
-        )
+       payload = jwt.decode(
+    token,
+    SECRET_KEY,
+    algorithms=[ALGORITHM],
+    options={"require": ["exp", "sub"]}
+)
 
         user_id = int(payload.get("sub"))
 
