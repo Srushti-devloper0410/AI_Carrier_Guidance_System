@@ -1055,4 +1055,5 @@ await loadDashboard();
 await loadStudents();
 await loadAssessments();
 await loadRecommendations();
+await loadUsers();
 });
