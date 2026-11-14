@@ -1024,6 +1024,105 @@ recommendationsTableBody?.addEventListener("click", async function (event) {
         }
     });
 
+    
+/* =========================================
+   MESSAGES MANAGEMENT
+========================================= */
+
+async function loadMessages() {
+    const tableBody = document.getElementById("recentMessages");
+
+    try {
+        const response = await fetch(`${API_URL}/admin/messages`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch messages");
+        }
+
+        const data = await response.json();
+
+        if (!data.messages || data.messages.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center">
+                        No messages found.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        tableBody.innerHTML = data.messages.map(message => `
+            <tr>
+                <td>${message.id}</td>
+                <td>${message.name}</td>
+                <td>${message.email}</td>
+                <td>${message.subject || "No Subject"}</td>
+                <td>${message.created_at ? new Date(message.created_at).toLocaleDateString() : "-"}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary"
+                        onclick="viewMessageDetails(${message.id})">
+                        View Details
+                    </button>
+                </td>
+            </tr>
+        `).join("");
+
+    } catch (error) {
+        console.error("Messages Error:", error);
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center text-danger">
+                    Failed to load messages.
+                </td>
+            </tr>
+        `;
+    }
+}
+
+
+/* VIEW MESSAGE DETAILS */
+
+async function viewMessageDetails(messageId) {
+    try {
+        const response = await fetch(
+            `${API_URL}/admin/messages/${messageId}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch message details");
+        }
+
+        const data = await response.json();
+        const message = data.message;
+
+        alert(
+            `Message Details\n\n` +
+            `ID: ${message.id}\n` +
+            `Name: ${message.name}\n` +
+            `Email: ${message.email}\n` +
+            `Subject: ${message.subject || "No Subject"}\n` +
+            `Date: ${message.created_at}\n\n` +
+            `Message:\n${message.message}`
+        );
+
+    } catch (error) {
+        console.error("Message Details Error:", error);
+        alert("Failed to load message details.");
+    }
+}
+
+    
     // Sidebar active link
     document.querySelectorAll(".sidebar-link").forEach(function (link) {
         link.addEventListener("click", function () {
@@ -1056,4 +1155,5 @@ await loadStudents();
 await loadAssessments();
 await loadRecommendations();
 await loadUsers();
+await loadMessages();
 });
