@@ -307,40 +307,78 @@
 </section>
 
 
-            <!-- Users -->
-            <section class="dashboard-card table-card" id="users">
+         
+<!-- Users Management -->
+<section class="dashboard-card table-card" id="users">
 
-                <div class="card-heading">
-                    <div>
-                        <h5>Recent Users</h5>
-                        <p>Registered accounts and their roles</p>
-                    </div>
-                    <a href="#users" class="view-all">View All</a>
-                </div>
+    <div class="card-heading">
+        <div>
+            <h5>Users Management</h5>
+            <p>View, search and manage registered accounts</p>
+        </div>
+    </div>
 
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th>User ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Created Date</th>
-                            </tr>
-                        </thead>
+    <!-- Search and Filter Toolbar -->
+    <div class="users-toolbar">
 
-                        <tbody id="recentUsers">
-                            <tr>
-                                <td colspan="5" class="text-center">
-                                    User data will appear here.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <input
+            type="text"
+            id="userSearch"
+            class="form-control"
+            placeholder="Search by name, email or role..."
+        >
 
-            </section>
+        <select id="userRoleFilter" class="form-select">
+            <option value="all">All Roles</option>
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="searchUsersBtn"
+        >
+            Search
+        </button>
+
+        <button
+            type="button"
+            class="btn btn-outline-secondary"
+            id="resetUsersBtn"
+        >
+            Reset
+        </button>
+
+    </div>
+
+    <!-- Users Table -->
+    <div class="table-responsive">
+        <table class="table align-middle">
+
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Created Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="allUsersTableBody">
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Loading users...
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</section>
 
             <!-- Messages -->
             <section class="dashboard-card table-card" id="messages">
