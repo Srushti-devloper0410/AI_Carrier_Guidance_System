@@ -814,6 +814,216 @@ recommendationsTableBody?.addEventListener("click", async function (event) {
 });
 
     
+    // =========================================
+    // USERS MANAGEMENT
+    // =========================================
+
+    const allUsersTableBody = document.getElementById("allUsersTableBody");
+    const userSearch = document.getElementById("userSearch");
+    const userRoleFilter = document.getElementById("userRoleFilter");
+    const searchUsersBtn = document.getElementById("searchUsersBtn");
+    const resetUsersBtn = document.getElementById("resetUsersBtn");
+
+    // Load all users
+    async function loadUsers(search = "") {
+        if (!allUsersTableBody) return;
+
+        allUsersTableBody.replaceChildren();
+
+        const loadingRow = document.createElement("tr");
+        const loadingCell = document.createElement("td");
+
+        loadingCell.colSpan = 6;
+        loadingCell.textContent = "Loading users...";
+        loadingCell.className = "text-center";
+
+        loadingRow.appendChild(loadingCell);
+        allUsersTableBody.appendChild(loadingRow);
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/users?search=${encodeURIComponent(search)}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+
+            if (response.status === 401) {
+                alert("Session expired. Please login again.");
+                localStorage.removeItem("authToken");
+                localStorage.removeItem("authUser");
+                window.location.href = "login.html";
+                return;
+            }
+
+            if (response.status === 403) {
+                alert("Admin permission required.");
+                window.location.href = "index.html";
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error("Unable to load users.");
+            }
+
+            const data = await response.json();
+            let users = data.users || [];
+
+            // Apply role filter
+            const selectedRole = userRoleFilter
+                ? userRoleFilter.value
+                : "all";
+
+            if (selectedRole !== "all") {
+                users = users.filter(function (user) {
+                    return user.role?.toLowerCase() === selectedRole;
+                });
+            }
+
+            allUsersTableBody.replaceChildren();
+
+            if (users.length === 0) {
+                const row = document.createElement("tr");
+                const cell = document.createElement("td");
+
+                cell.colSpan = 6;
+                cell.textContent = "No users found.";
+                cell.className = "text-center text-muted";
+
+                row.appendChild(cell);
+                allUsersTableBody.appendChild(row);
+                return;
+            }
+
+            users.forEach(function (user) {
+                const row = document.createElement("tr");
+
+                const values = [
+                    user.id,
+                    user.name,
+                    user.email,
+                    user.role,
+                    user.created_at
+                        ? new Date(user.created_at).toLocaleDateString("en-IN")
+                        : "-"
+                ];
+
+                values.forEach(function (value) {
+                    const cell = document.createElement("td");
+                    cell.textContent = value ?? "-";
+                    row.appendChild(cell);
+                });
+
+                // View action
+                const actionCell = document.createElement("td");
+                const viewButton = document.createElement("button");
+
+                viewButton.type = "button";
+                viewButton.textContent = "View";
+                viewButton.className = "btn btn-sm btn-info";
+                viewButton.dataset.action = "view-user";
+                viewButton.dataset.userId = user.id;
+
+                actionCell.appendChild(viewButton);
+                row.appendChild(actionCell);
+
+                allUsersTableBody.appendChild(row);
+            });
+
+        } catch (error) {
+            console.error("Users Management Error:", error);
+
+            allUsersTableBody.replaceChildren();
+
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 6;
+            cell.textContent = "Unable to load users. Please try again.";
+            cell.className = "text-center text-danger";
+
+            row.appendChild(cell);
+            allUsersTableBody.appendChild(row);
+        }
+    }
+
+    // Search button
+    searchUsersBtn?.addEventListener("click", function () {
+        loadUsers(userSearch ? userSearch.value.trim() : "");
+    });
+
+    // Search with Enter
+    userSearch?.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            loadUsers(userSearch.value.trim());
+        }
+    });
+
+    // Role filter
+    userRoleFilter?.addEventListener("change", function () {
+        loadUsers(userSearch ? userSearch.value.trim() : "");
+    });
+
+    // Reset button
+    resetUsersBtn?.addEventListener("click", function () {
+        if (userSearch) {
+            userSearch.value = "";
+        }
+
+        if (userRoleFilter) {
+            userRoleFilter.value = "all";
+        }
+
+        loadUsers();
+    });
+
+    // View user details
+    allUsersTableBody?.addEventListener("click", async function (event) {
+        const button = event.target.closest('[data-action="view-user"]');
+
+        if (!button) return;
+
+        const userId = button.dataset.userId;
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/users/${userId}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Unable to fetch user details.");
+            }
+
+            const data = await response.json();
+            const user = data.user;
+
+            alert(
+                `User Details\n\n` +
+                `ID: ${user.id}\n` +
+                `Name: ${user.name}\n` +
+                `Email: ${user.email}\n` +
+                `Role: ${user.role}\n` +
+                `Created Date: ${user.created_at || "-"}`
+            );
+
+        } catch (error) {
+            console.error("User Details Error:", error);
+            alert("Unable to display user details.");
+        }
+    });
+
     // Sidebar active link
     document.querySelectorAll(".sidebar-link").forEach(function (link) {
         link.addEventListener("click", function () {
