@@ -761,6 +761,7 @@ def get_admin_dashboard(
 # ADMIN STUDENTS MANAGEMENT
 # =========================================
 
+
 @app.get("/admin/students")
 def get_all_students(
     search: str = "",
@@ -772,11 +773,23 @@ def get_all_students(
     try:
         query = """
             SELECT
-                id, name, email, course, year,
-                percentage, stream, skills, interest
-            FROM students
-            WHERE name LIKE %s OR email LIKE %s
-            ORDER BY id DESC
+                u.id,
+                u.name,
+                u.email,
+                s.course,
+                s.year,
+                s.percentage,
+                s.stream,
+                s.skills,
+                s.interest
+            FROM users u
+            LEFT JOIN students s ON s.user_id = u.id
+            WHERE u.role = 'student'
+            AND (
+                u.name LIKE %s
+                OR u.email LIKE %s
+            )
+            ORDER BY u.id DESC
         """
 
         search_value = f"%{search.strip()}%"
