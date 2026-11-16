@@ -27,7 +27,6 @@ def get_current_user(
 ):
     token = credentials.credentials
 
-   
     try:
         payload = jwt.decode(
             token,
@@ -43,6 +42,9 @@ def get_current_user(
             status_code=401,
             detail="Invalid or expired token"
         )
+
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
 
     try:
         cursor.execute(
@@ -63,7 +65,7 @@ def get_current_user(
     finally:
         cursor.close()
         connection.close()
-
+    
 app = FastAPI(title="AI Career Guidance System")
 
 @app.get("/students/me")
