@@ -27,13 +27,14 @@ def get_current_user(
 ):
     token = credentials.credentials
 
+   
     try:
-       payload = jwt.decode(
-    token,
-    SECRET_KEY,
-    algorithms=[ALGORITHM],
-    options={"require": ["exp", "sub"]}
-)
+        payload = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM],
+            options={"require": ["exp", "sub"]}
+        )
 
         user_id = int(payload.get("sub"))
 
@@ -42,9 +43,6 @@ def get_current_user(
             status_code=401,
             detail="Invalid or expired token"
         )
-
-    connection = get_connection()
-    cursor = connection.cursor(dictionary=True)
 
     try:
         cursor.execute(
