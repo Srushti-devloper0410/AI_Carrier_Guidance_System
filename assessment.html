@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +12,11 @@
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="ass.css">
@@ -22,291 +25,561 @@
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-
+    <!-- Navbar -->
     <div id="navbar-container"></div>
-
     <script src="navbar.js"></script>
 
-    <!-- ================= ASSESSMENT ================= -->
-
+    <!-- Assessment Section -->
     <section class="assessment-section">
 
         <div class="container">
 
             <!-- Header -->
-
             <div class="assessment-header text-center">
 
                 <span class="assessment-badge">
-                    AI CAREER ASSESSMENT
+                    <i class="bi bi-stars"></i>
+                    AI CAREER DISCOVERY
                 </span>
 
                 <h1>
-                    Discover Your <span>Career Interests</span>
+                    Discover Your
+                    <span>Career Path</span>
                 </h1>
 
                 <p>
-                    Answer the following questions honestly.
-                    Your responses will help our system identify
-                    suitable career paths for you.
+                    Explore your interests, identify your strengths,
+                    and discover career opportunities that match
+                    your education and personality.
                 </p>
 
             </div>
 
-
-            <!-- Assessment Card -->
-
+            <!-- Main Assessment Card -->
             <div class="assessment-card">
 
                 <form id="assessmentForm">
 
+                    <!-- Progress -->
+                    <div class="assessment-progress">
 
-                    <!-- Question 1 -->
+                        <div class="progress-step active">
+                            <span class="step-number">1</span>
+                            <span>Education</span>
+                        </div>
 
-                    <div class="question-box">
+                        <div class="progress-step">
+                            <span class="step-number">2</span>
+                            <span>Interests</span>
+                        </div>
 
-                        <h3>1. What type of work interests you the most?</h3>
+                        <div class="progress-step">
+                            <span class="step-number">3</span>
+                            <span>Strengths</span>
+                        </div>
 
-                        <div class="option-list">
+                    </div>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="interest"
-                                       value="development"
-                                       required>
-                                <span>Building websites and applications</span>
+                    <div class="assessment-divider"></div>
+
+                    <!-- ================================= -->
+                    <!-- EDUCATION LEVEL -->
+                    <!-- ================================= -->
+
+                    <div class="selection-section">
+
+                        <h2>
+                            <i class="bi bi-mortarboard-fill text-primary"></i>
+                            What is your education level?
+                        </h2>
+
+                        <p class="section-description">
+                            Select your current education level
+                            to explore suitable career paths.
+                        </p>
+
+                        <div class="education-grid">
+
+                            <label class="education-card">
+
+                                <input
+                                    type="radio"
+                                    name="education"
+                                    value="after10"
+                                    required
+                                    hidden>
+
+                                <div class="card-icon">
+                                    <i class="bi bi-book"></i>
+                                </div>
+
+                                <h3>After 10th</h3>
+
+                                <p>
+                                    Explore diploma, vocational,
+                                    and other career options.
+                                </p>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="interest"
-                                       value="data">
-                                <span>Working with data and finding patterns</span>
+                            <label class="education-card">
+
+                                <input
+                                    type="radio"
+                                    name="education"
+                                    value="after12"
+                                    hidden>
+
+                                <div class="card-icon">
+                                    <i class="bi bi-mortarboard"></i>
+                                </div>
+
+                                <h3>After 12th</h3>
+
+                                <p>
+                                    Discover degree courses,
+                                    professional fields, and careers.
+                                </p>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="interest"
-                                       value="design">
-                                <span>Designing interfaces and user experiences</span>
-                            </label>
+                            <label class="education-card">
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="interest"
-                                       value="security">
-                                <span>Protecting systems and networks</span>
+                                <input
+                                    type="radio"
+                                    name="education"
+                                    value="graduation"
+                                    hidden>
+
+                                <div class="card-icon">
+                                    <i class="bi bi-award"></i>
+                                </div>
+
+                                <h3>After Graduation</h3>
+
+                                <p>
+                                    Find career opportunities,
+                                    higher studies, and specializations.
+                                </p>
+
                             </label>
 
                         </div>
 
                     </div>
 
+                    <div class="assessment-divider"></div>
 
-                    <!-- Question 2 -->
+                    <!-- ================================= -->
+                    <!-- CAREER INTERESTS -->
+                    <!-- ================================= -->
 
-                    <div class="question-box">
+                    <div class="selection-section">
 
-                        <h3>2. Which activity do you enjoy most?</h3>
+                        <h2>
+                            <i class="bi bi-compass-fill text-primary"></i>
+                            Which career areas interest you?
+                        </h2>
 
-                        <div class="option-list">
+                        <p class="section-description">
+                            Choose the career fields you would
+                            like to explore. You can select multiple options.
+                        </p>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="activity"
-                                       value="coding"
-                                       required>
-                                <span>Writing code and solving programming problems</span>
+                        <div class="selection-counter">
+                            <i class="bi bi-check-circle"></i>
+                            Select your interests
+                        </div>
+
+                        <div class="career-grid mt-3">
+
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="frontend"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-code-slash"></i>
+                                </div>
+
+                                <h3>IT & Technology</h3>
+
+                                <p>
+                                    Software, Web Development,
+                                    Cybersecurity
+                                </p>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="activity"
-                                       value="analysis">
-                                <span>Analyzing information and statistics</span>
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="healthcare"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-heart-pulse"></i>
+                                </div>
+
+                                <h3>Healthcare</h3>
+
+                                <p>
+                                    Medical, Nursing,
+                                    Pharmacy
+                                </p>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="activity"
-                                       value="creative">
-                                <span>Creating designs and visual ideas</span>
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="business"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-briefcase"></i>
+                                </div>
+
+                                <h3>Business</h3>
+
+                                <p>
+                                    Management, Marketing,
+                                    Entrepreneurship
+                                </p>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="activity"
-                                       value="security">
-                                <span>Finding and solving security problems</span>
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="design"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-palette"></i>
+                                </div>
+
+                                <h3>Arts & Design</h3>
+
+                                <p>
+                                    Fashion, Graphic Design,
+                                    Animation
+                                </p>
+
+                            </label>
+
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="agriculture"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-flower1"></i>
+                                </div>
+
+                                <h3>Agriculture</h3>
+
+                                <p>
+                                    Farming, Agronomy,
+                                    Agricultural Science
+                                </p>
+
+                            </label>
+
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="education"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-person-video3"></i>
+                                </div>
+
+                                <h3>Education</h3>
+
+                                <p>
+                                    Teaching, Training,
+                                    Education
+                                </p>
+
+                            </label>
+
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="government"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+
+                                <h3>Government & Defence</h3>
+
+                                <p>
+                                    Government Jobs,
+                                    Police, Defence
+                                </p>
+
+                            </label>
+
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="hospitality"
+                                    hidden>
+
+                                <div class="career-icon">
+                                    <i class="bi bi-airplane"></i>
+                                </div>
+
+                                <h3>Hospitality</h3>
+
+                                <p>
+                                    Tourism, Hotel Management,
+                                    Travel
+                                </p>
+
                             </label>
 
                         </div>
 
                     </div>
 
+                    <div class="assessment-divider"></div>
 
-                    <!-- Question 3 -->
+                    <!-- ================================= -->
+                    <!-- STRENGTHS -->
+                    <!-- ================================= -->
 
-                    <div class="question-box">
+                    <div class="selection-section">
 
-                        <h3>3. How comfortable are you with technology?</h3>
+                        <h2>
+                            <i class="bi bi-lightning-charge-fill text-primary"></i>
+                            What are your strengths?
+                        </h2>
 
-                        <div class="option-list">
+                        <p class="section-description">
+                            Select the abilities that describe you best.
+                            Choose multiple strengths.
+                        </p>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="technology"
-                                       value="high"
-                                       required>
-                                <span>Very comfortable</span>
+                        <div class="strength-grid">
+
+                            <label class="strength-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value="programming"
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-cpu"></i>
+                                </div>
+
+                                <span>Logical Thinking</span>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="technology"
-                                       value="medium">
-                                <span>Moderately comfortable</span>
+                            <label class="strength-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value="creativity"
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-brush"></i>
+                                </div>
+
+                                <span>Creativity</span>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="technology"
-                                       value="basic">
-                                <span>I am still learning</span>
+                            <label class="strength-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value="communication"
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-chat-dots"></i>
+                                </div>
+
+                                <span>Communication</span>
+
                             </label>
 
-                        </div>
+                            <label class="strength-card">
 
-                    </div>
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value="leadership"
+                                    hidden>
 
+                                <div class="strength-icon">
+                                    <i class="bi bi-people"></i>
+                                </div>
 
-                    <!-- Question 4 -->
+                                <span>Leadership</span>
 
-                    <div class="question-box">
-
-                        <h3>4. What is your strongest skill?</h3>
-
-                        <div class="option-list">
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="skill"
-                                       value="programming"
-                                       required>
-                                <span>Programming and logical thinking</span>
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="skill"
-                                       value="analysis">
-                                <span>Analysis and problem solving</span>
+                            <label class="strength-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value="analysis"
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-graph-up"></i>
+                                </div>
+
+                                <span>Analytical Skills</span>
+
                             </label>
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="skill"
-                                       value="creativity">
-                                <span>Creativity and design</span>
-                            </label>
+                            <label class="strength-card">
 
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="skill"
-                                       value="communication">
-                                <span>Communication and teamwork</span>
-                            </label>
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value="practical"
+                                    hidden>
 
-                        </div>
+                                <div class="strength-icon">
+                                    <i class="bi bi-tools"></i>
+                                </div>
 
-                    </div>
+                                <span>Practical Skills</span>
 
-
-                    <!-- Question 5 -->
-
-                    <div class="question-box">
-
-                        <h3>5. Which career area attracts you most?</h3>
-
-                        <div class="option-list">
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="career"
-                                       value="frontend"
-                                       required>
-                                <span>Web / Frontend Development</span>
-                            </label>
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="career"
-                                       value="data">
-                                <span>Data Science / Data Analytics</span>
-                            </label>
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="career"
-                                       value="uiux">
-                                <span>UI/UX Design</span>
-                            </label>
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="career"
-                                       value="cybersecurity">
-                                <span>Cybersecurity</span>
-                            </label>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Question 6 -->
-
-                    <div class="question-box">
-
-                        <h3>6. How do you prefer to solve problems?</h3>
-
-                        <div class="option-list">
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="problem"
-                                       value="logical"
-                                       required>
-                                <span>Using logic and step-by-step thinking</span>
-                            </label>
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="problem"
-                                       value="creative">
-                                <span>Using creative and innovative ideas</span>
-                            </label>
-
-                            <label class="assessment-option">
-                                <input type="radio"
-                                       name="problem"
-                                       value="research">
-                                <span>Researching information before deciding</span>
                             </label>
 
                         </div>
 
                     </div>
 
+                    <div class="assessment-divider"></div>
 
-                    <!-- Submit -->
+                    <!-- ================================= -->
+                    <!-- TECHNOLOGY COMFORT -->
+                    <!-- ================================= -->
+
+                    <div class="selection-section">
+
+                        <h2>
+                            <i class="bi bi-laptop text-primary"></i>
+                            How comfortable are you with technology?
+                        </h2>
+
+                        <p class="section-description">
+                            This helps us understand your technology
+                            familiarity. It does not limit your career options.
+                        </p>
+
+                        <div class="strength-grid">
+
+                            <label class="strength-card">
+
+                                <input
+                                    type="radio"
+                                    name="technology"
+                                    value="high"
+                                    required
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-stars"></i>
+                                </div>
+
+                                <span>Very Comfortable</span>
+
+                            </label>
+
+                            <label class="strength-card">
+
+                                <input
+                                    type="radio"
+                                    name="technology"
+                                    value="medium"
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-laptop"></i>
+                                </div>
+
+                                <span>Moderately Comfortable</span>
+
+                            </label>
+
+                            <label class="strength-card">
+
+                                <input
+                                    type="radio"
+                                    name="technology"
+                                    value="basic"
+                                    hidden>
+
+                                <div class="strength-icon">
+                                    <i class="bi bi-book"></i>
+                                </div>
+
+                                <span>Still Learning</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================================= -->
+                    <!-- SUBMIT -->
+                    <!-- ================================= -->
 
                     <div class="assessment-action">
 
-                        <button type="submit"
-                                class="btn btn-primary">
-                            Analyze My Career →
+                        <button
+                            type="reset"
+                            class="btn btn-outline-secondary">
+
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Reset Selection
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                            Analyze My Career
+                            <i class="bi bi-arrow-right"></i>
+
                         </button>
 
                     </div>
@@ -319,11 +592,13 @@
 
     </section>
 
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
 
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Assessment JS -->
     <script src="ass.js"></script>
 
 </body>
-
 </html>
