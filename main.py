@@ -873,6 +873,7 @@ def get_student_details(
 
 
 
+
 # =========================================
 # ADMIN DELETE STUDENT
 # =========================================
@@ -886,9 +887,16 @@ def delete_student(
     cursor = connection.cursor(dictionary=True)
 
     try:
-        # Check whether student exists
+        # Check student account and profile
         cursor.execute(
-            "SELECT id FROM students WHERE id = %s",
+            """
+            SELECT
+                u.id AS user_id,
+                s.id AS profile_id
+            FROM users u
+            LEFT JOIN students s ON s.user_id = u.id
+            WHERE u.id = %s AND u.role = 'student'
+            """,
             (student_id,)
         )
 
@@ -900,28 +908,37 @@ def delete_student(
                 detail="Student not found"
             )
 
-        # Delete related assessments
-        cursor.execute(
-            "DELETE FROM assessments WHERE student_id = %s",
-            (student_id,)
-        )
+        profile_id = student["profile_id"]
 
-        # Delete related recommendations
-        cursor.execute(
-            "DELETE FROM recommendations WHERE student_id = %s",
-            (student_id,)
-        )
+        # Delete related records if profile exists
+        if profile_id is not None:
 
-        # Delete student profile
+            cursor.execute(
+                "DELETE FROM assessments WHERE student_id = %s",
+                (profile_id,)
+            )
+
+            cursor.execute(
+                "DELETE FROM recommendations WHERE student_id = %s",
+                (profile_id,)
+            )
+
+            # Delete student profile
+            cursor.execute(
+                "DELETE FROM students WHERE id = %s",
+                (profile_id,)
+            )
+
+        # Delete student user account
         cursor.execute(
-            "DELETE FROM students WHERE id = %s",
+            "DELETE FROM users WHERE id = %s AND role = 'student'",
             (student_id,)
         )
 
         connection.commit()
 
         return {
-            "message": "Student and related records deleted successfully"
+            "message": "Student account and related records deleted successfully"
         }
 
     except HTTPException:
