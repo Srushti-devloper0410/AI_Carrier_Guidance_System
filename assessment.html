@@ -8,17 +8,14 @@
 
     <title>Career Assessment | AI Career Guide</title>
 
-    <!-- Bootstrap -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="ass.css">
     <link rel="stylesheet" href="navbar.css">
 </head>
@@ -55,7 +52,6 @@
 
             </div>
 
-            <!-- Main Assessment Card -->
             <div class="assessment-card">
 
                 <form id="assessmentForm">
@@ -82,10 +78,7 @@
 
                     <div class="assessment-divider"></div>
 
-                    <!-- ================================= -->
-                    <!-- EDUCATION LEVEL -->
-                    <!-- ================================= -->
-
+                    <!-- EDUCATION -->
                     <div class="selection-section">
 
                         <h2>
@@ -94,8 +87,8 @@
                         </h2>
 
                         <p class="section-description">
-                            Select your current education level
-                            to explore suitable career paths.
+                            Select your current education level to explore
+                            suitable career paths.
                         </p>
 
                         <div class="education-grid">
@@ -109,9 +102,9 @@
                                     required
                                     hidden>
 
-                                <div class="card-icon">
-                                    <i class="bi bi-book"></i>
-                                </div>
+                                <img
+                                    src="after10.jpg"
+                                    alt="Student studying after 10th">
 
                                 <h3>After 10th</h3>
 
@@ -130,9 +123,9 @@
                                     value="after12"
                                     hidden>
 
-                                <div class="card-icon">
-                                    <i class="bi bi-mortarboard"></i>
-                                </div>
+                                <img
+                                    src="after12.jpg"
+                                    alt="Students studying after 12th">
 
                                 <h3>After 12th</h3>
 
@@ -151,9 +144,9 @@
                                     value="graduation"
                                     hidden>
 
-                                <div class="card-icon">
-                                    <i class="bi bi-award"></i>
-                                </div>
+                                <img
+                                    src="graduation.jpg"
+                                    alt="College graduate">
 
                                 <h3>After Graduation</h3>
 
@@ -170,10 +163,7 @@
 
                     <div class="assessment-divider"></div>
 
-                    <!-- ================================= -->
                     <!-- CAREER INTERESTS -->
-                    <!-- ================================= -->
-
                     <div class="selection-section">
 
                         <h2>
@@ -182,17 +172,13 @@
                         </h2>
 
                         <p class="section-description">
-                            Choose the career fields you would
-                            like to explore. You can select multiple options.
+                            Select multiple career fields you would
+                            like to explore.
                         </p>
 
-                        <div class="selection-counter">
-                            <i class="bi bi-check-circle"></i>
-                            Select your interests
-                        </div>
+                        <div class="career-grid">
 
-                        <div class="career-grid mt-3">
-
+                            <!-- IT -->
                             <label class="career-card">
 
                                 <input
@@ -201,9 +187,9 @@
                                     value="frontend"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-code-slash"></i>
-                                </div>
+                                <img
+                                    src="technology.jpg"
+                                    alt="IT and technology career">
 
                                 <h3>IT & Technology</h3>
 
@@ -214,6 +200,7 @@
 
                             </label>
 
+                            <!-- Healthcare -->
                             <label class="career-card">
 
                                 <input
@@ -222,9 +209,9 @@
                                     value="healthcare"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-heart-pulse"></i>
-                                </div>
+                                <img
+                                    src="healthcare.jpg"
+                                    alt="Healthcare professional">
 
                                 <h3>Healthcare</h3>
 
@@ -235,6 +222,7 @@
 
                             </label>
 
+                            <!-- Business -->
                             <label class="career-card">
 
                                 <input
@@ -243,11 +231,11 @@
                                     value="business"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-briefcase"></i>
-                                </div>
+                                <img
+                                    src="business.jpg"
+                                    alt="Business management career">
 
-                                <h3>Business</h3>
+                                <h3>Business & Management</h3>
 
                                 <p>
                                     Management, Marketing,
@@ -256,6 +244,7 @@
 
                             </label>
 
+                            <!-- Design -->
                             <label class="career-card">
 
                                 <input
@@ -264,9 +253,9 @@
                                     value="design"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-palette"></i>
-                                </div>
+                                <img
+                                    src="design.jpg"
+                                    alt="Creative design career">
 
                                 <h3>Arts & Design</h3>
 
@@ -277,6 +266,7 @@
 
                             </label>
 
+                            <!-- Agriculture -->
                             <label class="career-card">
 
                                 <input
@@ -285,9 +275,9 @@
                                     value="agriculture"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-flower1"></i>
-                                </div>
+                                <img
+                                    src="agriculture.jpg"
+                                    alt="Agriculture career">
 
                                 <h3>Agriculture</h3>
 
@@ -298,6 +288,7 @@
 
                             </label>
 
+                            <!-- Education -->
                             <label class="career-card">
 
                                 <input
@@ -306,9 +297,9 @@
                                     value="education"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-person-video3"></i>
-                                </div>
+                                <img
+                                    src="education.jpg"
+                                    alt="Teaching career">
 
                                 <h3>Education</h3>
 
@@ -319,6 +310,7 @@
 
                             </label>
 
+                            <!-- Government -->
                             <label class="career-card">
 
                                 <input
@@ -327,9 +319,9 @@
                                     value="government"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-shield-check"></i>
-                                </div>
+                                <img
+                                    src="government.jpg"
+                                    alt="Government service career">
 
                                 <h3>Government & Defence</h3>
 
@@ -340,6 +332,7 @@
 
                             </label>
 
+                            <!-- Hospitality -->
                             <label class="career-card">
 
                                 <input
@@ -348,15 +341,103 @@
                                     value="hospitality"
                                     hidden>
 
-                                <div class="career-icon">
-                                    <i class="bi bi-airplane"></i>
-                                </div>
+                                <img
+                                    src="hospitality.jpg"
+                                    alt="Hospitality and tourism career">
 
-                                <h3>Hospitality</h3>
+                                <h3>Hospitality & Tourism</h3>
 
                                 <p>
                                     Tourism, Hotel Management,
                                     Travel
+                                </p>
+
+                            </label>
+
+                            <!-- Engineering -->
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="engineering"
+                                    hidden>
+
+                                <img
+                                    src="engineering.jpg"
+                                    alt="Engineering career">
+
+                                <h3>Engineering</h3>
+
+                                <p>
+                                    Civil, Mechanical,
+                                    Electrical
+                                </p>
+
+                            </label>
+
+                            <!-- Finance -->
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="finance"
+                                    hidden>
+
+                                <img
+                                    src="finance.jpg"
+                                    alt="Finance and accounting career">
+
+                                <h3>Finance & Accounting</h3>
+
+                                <p>
+                                    Banking, Accounting,
+                                    Financial Analysis
+                                </p>
+
+                            </label>
+
+                            <!-- Law -->
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="law"
+                                    hidden>
+
+                                <img
+                                    src="law.jpg"
+                                    alt="Law and legal career">
+
+                                <h3>Law</h3>
+
+                                <p>
+                                    Lawyer, Legal Advisor,
+                                    Judiciary
+                                </p>
+
+                            </label>
+
+                            <!-- Media -->
+                            <label class="career-card">
+
+                                <input
+                                    type="checkbox"
+                                    name="career"
+                                    value="media"
+                                    hidden>
+
+                                <img
+                                    src="media.jpg"
+                                    alt="Media and communication career">
+
+                                <h3>Media & Communication</h3>
+
+                                <p>
+                                    Journalism, Photography,
+                                    Broadcasting
                                 </p>
 
                             </label>
@@ -367,10 +448,7 @@
 
                     <div class="assessment-divider"></div>
 
-                    <!-- ================================= -->
                     <!-- STRENGTHS -->
-                    <!-- ================================= -->
-
                     <div class="selection-section">
 
                         <h2>
@@ -379,8 +457,7 @@
                         </h2>
 
                         <p class="section-description">
-                            Select the abilities that describe you best.
-                            Choose multiple strengths.
+                            Choose the abilities that describe you best.
                         </p>
 
                         <div class="strength-grid">
@@ -393,9 +470,9 @@
                                     value="programming"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-cpu"></i>
-                                </div>
+                                <img
+                                    src="logical.jpg"
+                                    alt="Logical thinking">
 
                                 <span>Logical Thinking</span>
 
@@ -409,9 +486,9 @@
                                     value="creativity"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-brush"></i>
-                                </div>
+                                <img
+                                    src="creativity.jpg"
+                                    alt="Creative skills">
 
                                 <span>Creativity</span>
 
@@ -425,9 +502,9 @@
                                     value="communication"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-chat-dots"></i>
-                                </div>
+                                <img
+                                    src="communication.jpg"
+                                    alt="Communication skills">
 
                                 <span>Communication</span>
 
@@ -441,9 +518,9 @@
                                     value="leadership"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-people"></i>
-                                </div>
+                                <img
+                                    src="leadership.jpg"
+                                    alt="Leadership skills">
 
                                 <span>Leadership</span>
 
@@ -457,9 +534,9 @@
                                     value="analysis"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-graph-up"></i>
-                                </div>
+                                <img
+                                    src="analytical.jpg"
+                                    alt="Analytical thinking">
 
                                 <span>Analytical Skills</span>
 
@@ -473,9 +550,9 @@
                                     value="practical"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-tools"></i>
-                                </div>
+                                <img
+                                    src="practical.jpg"
+                                    alt="Practical skills">
 
                                 <span>Practical Skills</span>
 
@@ -487,10 +564,7 @@
 
                     <div class="assessment-divider"></div>
 
-                    <!-- ================================= -->
                     <!-- TECHNOLOGY COMFORT -->
-                    <!-- ================================= -->
-
                     <div class="selection-section">
 
                         <h2>
@@ -514,10 +588,6 @@
                                     required
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-stars"></i>
-                                </div>
-
                                 <span>Very Comfortable</span>
 
                             </label>
@@ -529,10 +599,6 @@
                                     name="technology"
                                     value="medium"
                                     hidden>
-
-                                <div class="strength-icon">
-                                    <i class="bi bi-laptop"></i>
-                                </div>
 
                                 <span>Moderately Comfortable</span>
 
@@ -546,10 +612,6 @@
                                     value="basic"
                                     hidden>
 
-                                <div class="strength-icon">
-                                    <i class="bi bi-book"></i>
-                                </div>
-
                                 <span>Still Learning</span>
 
                             </label>
@@ -558,10 +620,7 @@
 
                     </div>
 
-                    <!-- ================================= -->
-                    <!-- SUBMIT -->
-                    <!-- ================================= -->
-
+                    <!-- ACTION -->
                     <div class="assessment-action">
 
                         <button
@@ -592,12 +651,10 @@
 
     </section>
 
-    <!-- Bootstrap JS -->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
 
-    <!-- Assessment JS -->
     <script src="ass.js"></script>
 
 </body>
