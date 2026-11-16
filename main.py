@@ -308,6 +308,15 @@ class AssessmentData(BaseModel):
     career: str
     problem: str
 
+# --------------------------------
+# Recommendation Model
+# --------------------------------
+
+class RecommendationData(BaseModel):
+    student_id: int
+    career: str
+    match_score: float
+
 
 # --------------------------------
 # Save Assessment
