@@ -819,6 +819,7 @@ def get_all_students(
         connection.close()
 
 
+
 @app.get("/admin/students/{student_id}")
 def get_student_details(
     student_id: int,
@@ -831,10 +832,18 @@ def get_student_details(
         cursor.execute(
             """
             SELECT
-                id, name, email, course, year,
-                percentage, stream, skills, interest
-            FROM students
-            WHERE id = %s
+                u.id,
+                u.name,
+                u.email,
+                s.course,
+                s.year,
+                s.percentage,
+                s.stream,
+                s.skills,
+                s.interest
+            FROM users u
+            LEFT JOIN students s ON s.user_id = u.id
+            WHERE u.id = %s AND u.role = 'student'
             """,
             (student_id,)
         )
@@ -861,6 +870,7 @@ def get_student_details(
     finally:
         cursor.close()
         connection.close()
+
 
 
 # =========================================
