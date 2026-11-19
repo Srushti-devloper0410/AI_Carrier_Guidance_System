@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Careers | IRA Guidance System</title>
+    <link rel="stylesheet" href="career.css">
+</head>
+
+<body data-category="engineering">
+
+    <!-- NAVBAR -->
+    <nav class="career-navbar">
+        <a href="index.html" class="brand">
+            <span class="brand-title">IRA</span>
+            <span class="brand-full-name">Intelligent Roadmap Assistant</span>
+            <span class="brand-subtitle">AI-Based Career Guidance System</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="career-explorer.html">Career Categories</a>
+            <a href="#careers">Career Options</a>
+            <a href="#roadmap">Education Roadmap</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="career-hero">
+        <span class="hero-tag">CAREER EXPLORER / ENGINEERING</span>
+        <h1>Build Your Future Through Engineering</h1>
+        <p>
+            Explore engineering fields, discover different specialisations,
+            understand educational pathways and learn how engineers
+            create solutions to real-world problems.
+        </p>
+    </header>
+
+    <!-- INTRODUCTION -->
+    <section class="career-container">
+        <h2 class="section-title">What is Engineering?</h2>
+        <p class="section-description">
+            Engineering applies mathematics, science and technology
+            to design, develop, test and improve products, structures,
+            machines, systems and processes.
+        </p>
+
+        <div class="info-section">
+            <h2>Understanding the Engineering Industry</h2>
+            <p>
+                Engineers work in construction, manufacturing,
+                transportation, energy, electronics, software,
+                aerospace, automation and many other industries.
+            </p>
+            <p>
+                They identify problems, develop designs, test solutions
+                and improve systems to make them safer, more efficient
+                and more useful.
+            </p>
+
+            <h3>Who can choose Engineering?</h3>
+            <ul>
+                <li>Students interested in mathematics and science.</li>
+                <li>Students who enjoy building and designing things.</li>
+                <li>Students interested in machines, electronics or technology.</li>
+                <li>Students who enjoy logical thinking and problem-solving.</li>
+                <li>Students interested in innovation and practical projects.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CAREER OPTIONS -->
+    <section class="career-container" id="careers">
+        <h2 class="section-title">Career Opportunities in Engineering</h2>
+        <p class="section-description">
+            Engineering has many branches. Explore these career roles
+            and shortlist the options that match your interests.
+        </p>
+
+        <div class="career-grid">
+
+            <div class="career-card" data-career="Civil Engineer">
+                <div class="career-icon">🏗️</div>
+                <h3>Civil Engineer</h3>
+                <p>Plans, designs and supervises infrastructure projects such as buildings, roads, bridges and water systems.</p>
+                <span class="tag">Construction</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Mechanical Engineer">
+                <div class="career-icon">⚙️</div>
+                <h3>Mechanical Engineer</h3>
+                <p>Designs, develops and maintains machines, engines, manufacturing equipment and mechanical systems.</p>
+                <span class="tag">Machines</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Electrical Engineer">
+                <div class="career-icon">⚡</div>
+                <h3>Electrical Engineer</h3>
+                <p>Works with electrical power systems, motors, generators, circuits and electrical equipment.</p>
+                <span class="tag">Electricity</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Computer Engineer">
+                <div class="career-icon">💻</div>
+                <h3>Computer Engineer</h3>
+                <p>Works with computer hardware, software systems, embedded devices and computer architecture.</p>
+                <span class="tag">Computing</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Electronics Engineer">
+                <div class="career-icon">🔌</div>
+                <h3>Electronics Engineer</h3>
+                <p>Designs and tests electronic circuits, communication devices, control systems and electronic products.</p>
+                <span class="tag">Electronics</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Chemical Engineer">
+                <div class="career-icon">🧪</div>
+                <h3>Chemical Engineer</h3>
+                <p>Develops and improves industrial processes involving chemicals, materials, energy and manufacturing.</p>
+                <span class="tag">Chemical Processes</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Automobile Engineer">
+                <div class="career-icon">🚗</div>
+                <h3>Automobile Engineer</h3>
+                <p>Works on the design, development, testing and improvement of vehicles and their systems.</p>
+                <span class="tag">Automobiles</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Aerospace Engineer">
+                <div class="career-icon">🚀</div>
+                <h3>Aerospace Engineer</h3>
+                <p>Designs and develops aircraft, spacecraft, propulsion systems and related technologies.</p>
+                <span class="tag">Aerospace</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+            <div class="career-card" data-career="Robotics Engineer">
+                <div class="career-icon">🤖</div>
+                <h3>Robotics Engineer</h3>
+                <p>Develops robotic systems by combining mechanical engineering, electronics, programming and automation.</p>
+                <span class="tag">Robotics</span>
+                <button class="btn btn-primary select-career">Add to Shortlist</button>
+            </div>
+
+        </div>
+
+        <!-- SHORTLIST -->
+        <div class="shortlist-panel">
+            <h3>Your Engineering Career Shortlist</h3>
+            <p>Select the engineering careers that interest you.</p>
+            <p>
+                Selected Careers:
+                <span class="shortlist-count" id="shortlistCount">0</span>
+            </p>
+            <div id="shortlistList">
+                <p>No careers selected yet.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION PATHWAY -->
+    <section class="career-container" id="roadmap">
+        <h2 class="section-title">Education Pathway in Engineering</h2>
+        <p class="section-description">
+            Your pathway depends on the engineering branch and
+            admission requirements of the institution.
+        </p>
+
+        <div class="roadmap">
+            <div class="roadmap-card">
+                <h3>After 10th</h3>
+                <ul>
+                    <li>Choose Science with Physics, Chemistry and Mathematics (PCM) for the 11th–12th engineering route.</li>
+                    <li>Consider a Diploma in Engineering and Technology after SSC.</li>
+                    <li>Explore branches such as Civil, Mechanical, Electrical, Computer and Electronics.</li>
+                    <li>Check the current diploma admission eligibility.</li>
+                </ul>
+            </div>
+
+            <div class="roadmap-card">
+                <h3>After 12th</h3>
+                <ul>
+                    <li>B.E. - Bachelor of Engineering.</li>
+                    <li>B.Tech - Bachelor of Technology.</li>
+                    <li>Choose a branch such as Computer, Civil, Mechanical or Electrical Engineering.</li>
+                    <li>Other specialised engineering degrees offered by recognised institutions.</li>
+                </ul>
+            </div>
+
+            <div class="roadmap-card">
+                <h3>After Graduation</h3>
+                <ul>
+                    <li>M.E. - Master of Engineering.</li>
+                    <li>M.Tech - Master of Technology.</li>
+                    <li>Specialisation in Robotics, AI, Structural Engineering or other fields.</li>
+                    <li>Research, higher studies and professional certifications.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTRANCE EXAMS -->
+    <section class="career-container">
+        <h2 class="section-title">Entrance Exams and Admissions</h2>
+
+        <div class="info-section">
+            <h3>1. MHT-CET (PCM)</h3>
+            <p>
+                Maharashtra's state-level entrance examination
+                used for admission to eligible engineering and
+                technology degree courses.
+            </p>
+
+            <h3>2. JEE Main</h3>
+            <p>
+                National-level entrance examination used for
+                admission to NITs, IIITs and other participating
+                engineering institutions, subject to their rules.
+            </p>
+
+            <h3>3. JEE Advanced</h3>
+            <p>
+                Entrance examination for admission to IIT
+                undergraduate programmes. Candidates must first
+                satisfy the applicable JEE Main and other eligibility rules.
+            </p>
+
+            <h3>4. Diploma Admissions</h3>
+            <p>
+                Maharashtra conducts a separate post-SSC diploma
+                admission process through the Directorate of
+                Technical Education (DTE).
+            </p>
+
+            <h3>5. GATE</h3>
+            <p>
+                Graduate Aptitude Test in Engineering is used by
+                many institutions for postgraduate engineering
+                admissions and by some organisations for recruitment.
+            </p>
+
+            <h3>Important Note</h3>
+            <p>
+                Entrance exams, accepted subjects, marks and eligibility
+                vary by course, institution and admission year.
+                Always check the latest official admission brochure.
+            </p>
+
+            <p>
+                <a href="https://cetcell.mahacet.org/" target="_blank">
+                    Maharashtra CET Cell
+                </a>
+            </p>
+
+            <p>
+                <a href="https://jeemain.nta.nic.in/" target="_blank">
+                    JEE Main Official Website
+                </a>
+            </p>
+
+            <p>
+                <a href="https://jeeadv.ac.in/" target="_blank">
+                    JEE Advanced Official Website
+                </a>
+            </p>
+
+            <p>
+                <a href="https://gate2026.iitg.ac.in/" target="_blank">
+                    GATE Official Website
+                </a>
+            </p>
+        </div>
+    </section>
+
+    <!-- REQUIRED SKILLS -->
+    <section class="career-container">
+        <h2 class="section-title">Skills Required for Engineering</h2>
+
+        <div class="info-section">
+            <h3>Technical Skills</h3>
+            <ul>
+                <li>Mathematics and scientific fundamentals.</li>
+                <li>Engineering drawing and design concepts.</li>
+                <li>Technical software and computer applications.</li>
+                <li>Knowledge of the selected engineering branch.</li>
+                <li>Testing, measurement and analysis.</li>
+                <li>Practical project development.</li>
+            </ul>
+
+            <h3>Personal Skills</h3>
+            <ul>
+                <li>Logical and analytical thinking.</li>
+                <li>Problem-solving ability.</li>
+                <li>Creativity and innovation.</li>
+                <li>Teamwork and communication.</li>
+                <li>Time management.</li>
+                <li>Attention to safety and detail.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CAREER ROADMAP -->
+    <section class="career-container">
+        <h2 class="section-title">How to Build a Career in Engineering?</h2>
+
+        <div class="info-section">
+            <ol>
+                <li>Explore different engineering branches.</li>
+                <li>Choose a suitable educational pathway.</li>
+                <li>Understand the eligibility and entrance requirements.</li>
+                <li>Complete a recognised engineering degree or diploma.</li>
+                <li>Develop practical and technical skills.</li>
+                <li>Build projects and gain industry experience.</li>
+                <li>Complete internships or relevant training.</li>
+                <li>Apply for suitable engineering opportunities or higher studies.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="career-footer">
+        <h3>IRA - Intelligent Roadmap Assistant</h3>
+        <p>Explore Your Interests. Discover Your Future.</p>
+        <p>© 2026 IRA Guidance System</p>
+    </footer>
+
+    <script src="career.js"></script>
+
+</body>
+</html>
