@@ -387,3 +387,37 @@ body {
         padding: 20px;
     }
 }
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+
+.brand-title {
+    color: var(--primary);
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.brand-full-name {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.career-navbar {
+    padding: 12px 5%;
+}
+
+.nav-links {
+    gap: 17px;
+}
