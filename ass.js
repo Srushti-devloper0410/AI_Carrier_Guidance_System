@@ -282,3 +282,15 @@ if (!authToken) {
         }
 
     });
+
+// Reset individual career category
+function resetCareer(careerValue) {
+
+    const checkbox = document.querySelector(
+        `input[name="career"][value="${careerValue}"]`
+    );
+
+    if (checkbox) {
+        checkbox.checked = false;
+    }
+}
